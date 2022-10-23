@@ -3,6 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.xpensemobileapp">
 
+    <!--Provide access to camera-->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+
+
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +27,23 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".ExpensesDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExpenseOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExpenseReportOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExpenseReportActivity"
+            android:exported="false"
+            android:parentActivityName=".ExpenseFormActivity" />
+        <activity
+            android:name=".ExpenseFormActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -22,6 +52,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_blue">#42f2f5</color>
+    <color name="my_red">#FF0000</color>
+    <color name="hint_color">#838383</color>
+    <color name="calender_Selected_date">#49f2bd</color>
+    <color name="btn_border_color">#002CA7</color>
+    <color name="add_generate_color">#1039B2</color>
+
 </resources>
