@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="headingStyling">
+        <item name="android:textColor">@color/my_red</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="labelStyling">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="valueStyling">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+    </style>
+
+    <style name="addBtnStyling">
+        <item name="android:bottomRightRadius">50dp</item>
+        <item name="android:bottomLeftRadius">50dp</item>
+        <item name="android:backgroundTint">@color/add_generate_color</item>
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="plusBtnStyling">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+
+    <style name="uploadImageTextStyling">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/hint_color</item>
+    </style>
+
+    <!--###########################################################################################-->
+
+    <!--ExpenseReportActivity styles-->
+    <style name="mainTitleStyling">
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/my_red</item>
+    </style>
+
+    <!--CalenderView stylings-->
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/calender_Selected_date</item>
+        <item name="colorPrimary">@android:color/darker_gray</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
+    <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="hintStylings">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/hint_color</item>
+    </style>
+
+    <style name="generateBtnStyling">
+        <item name="android:backgroundTint">@color/add_generate_color</item>
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--daily/custom button stylings - default-->
+    <style name="defaultBtnStyling">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+
+    <!--daily/custom button stylings - clicked-->
+    <style name="clickedBtnStyling">
+        <item name="android:backgroundTint">#42f2f5</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+    <!--###########################################################################################-->
+
+    <!--ExpenseReportOverviewActivity stylings-->
+    <style name="overviewTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textColor">@color/my_red</item>
+    </style>
+
+    <style name="graphTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="summaryTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--Report Summary stylings-->
+    <style name="summaryContentHeadings">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="summaryContentValues">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--#########################################################################################-->
+    <!--ExpensesDashboardActivity stylings-->
+    <style name="expensesDashboardTitle">
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/my_red</item>
+    </style>
+
+    <style name="recentTitle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="expenseNo">
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <!--#########################################################################################-->
+    <!--ExpenseOverviewActivity stylings-->
+
+    <style name="expenseOverviewTitle">
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/my_red</item>
+    </style>
+
+    <style name="expenseOverviewLabels">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="expenseOverviewLabelValues">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <!--####################################################################################-->
+
+
+</resources>
