@@ -23,23 +23,25 @@ public class RecyclerViewAdapter {
     private Context mContext;
     private BudgetAdapter budgetAdapter;
 
-    public void initRecyclerView(RecyclerView recyclerView, Context context, ArrayList<Budget> budgetArray){
+    public void initRecyclerView(RecyclerView recyclerView, Context context, ArrayList<Budget> budgetArrayList, ArrayList<String> keys){
         mContext = context;
-        budgetAdapter = new BudgetAdapter(budgetArray);
+        budgetAdapter = new BudgetAdapter(budgetArrayList, keys );
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(budgetAdapter);
     }
 
     class BudgetReportView extends RecyclerView.ViewHolder {
 
+        private String key;
+
         //Create Table Row Object
-        TableRow tableRow;
+        private TableRow tableRow;
 
 
         //Create TextViews for each column
-        String dateFrom, dateTo, amount;
+        private String dateFrom, dateTo, amount;
 
-        TextView editTxtRecordNo, editTxtDateFrom, editTxtDateTo, editTxtAmount;
+        private TextView editTxtRecordNo, editTxtDateFrom, editTxtDateTo, editTxtAmount;
 
         public BudgetReportView(ViewGroup parent) {
             super(LayoutInflater.from(mContext).inflate(R.layout.table_row_item, parent, false));
@@ -54,7 +56,7 @@ public class RecyclerViewAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, UpdateBudgetFormActivity.class);
-                    Log.i("==================hgiuygiuygiuygiuygi===============================",editTxtDateFrom.getText().toString());
+                    intent.putExtra("key", key);
                     intent.putExtra("dateFrom", editTxtDateFrom.getText().toString());
                     intent.putExtra("dateTo", editTxtDateTo.getText().toString());
                     intent.putExtra("amount", editTxtAmount.getText().toString());
@@ -64,20 +66,23 @@ public class RecyclerViewAdapter {
             });
         }
 
-        public void bind(Budget budget) {
+        public void bind(Budget budget, String key) {
             editTxtRecordNo.setText("2");
             editTxtDateFrom.setText(budget.getDate_from());
             editTxtDateTo.setText(budget.getDate_to());
-            editTxtAmount.setText(String.valueOf(budget.getAmount()));
+            editTxtAmount.setText(String.format("%.2f", budget.getAmount()));
+            this.key = key;
         }
     }
 
     class BudgetAdapter extends RecyclerView.Adapter<BudgetReportView> {
 
         private ArrayList<Budget> budgetArray;
+        private ArrayList<String> keys;
 
-        public BudgetAdapter(ArrayList<Budget> budgetArray) {
+        public BudgetAdapter(ArrayList<Budget> budgetArray, ArrayList<String> keys) {
             this.budgetArray = budgetArray;
+            this.keys = keys;
         }
 
 
@@ -89,7 +94,7 @@ public class RecyclerViewAdapter {
 
         @Override
         public void onBindViewHolder(@NonNull BudgetReportView holder, int position) {
-            holder.bind(budgetArray.get(position));
+            holder.bind(budgetArray.get(position), keys.get(position));
         }
 
         @Override
