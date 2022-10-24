@@ -1,16 +1,16 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.budget;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.xpensemobileapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UpdateBudgetFormActivity extends AppCompatActivity {
@@ -36,6 +36,18 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
         btnUpdateBudget = findViewById(R.id.btnUpdateBudget);
         deleteBtn = findViewById(R.id.btnDeleteBudget);
         deleteBtn.setOnClickListener(this::deleteBudget);
+
+        if(getIntent().getExtras()!=null){
+            budgetDateFrom.setText(getIntent().getExtras().getString("dateFrom"));
+            budgetDateTo.setText(getIntent().getExtras().getString("dateTo"));
+            budgetAmount.setText(getIntent().getExtras().getString("amount"));
+            Log.i("sikhsoigfhoiahoigkhoiajhgoijhaiog", getIntent().getExtras().toString());
+        }
+        else{
+            Log.i("sikhsoigfhoiahoigkhoiajhgoijhaiog", "NULLLLLLLLLLLLLLLLLLLLLLLLLL");
+        }
+
+
 
         //Budget Object
         //budget = new Budget();

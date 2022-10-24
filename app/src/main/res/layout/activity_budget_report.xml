@@ -5,7 +5,7 @@
     android:id="@+id/budgetReport"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BudgetReportActivity"
+    tools:context=".budget.BudgetReportActivity"
     tools:layout_editor_absoluteX="-8dp"
     tools:layout_editor_absoluteY="-79dp">
 
@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:clickable="true"
+        android:contentDescription="@string/add_budget"
         app:borderWidth="0dp"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,105 +39,114 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/ic_baseline_add_circle_24" />
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        android:focusable="true" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBudget"
-        android:layout_width="376dp"
-        android:layout_height="582dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="380dp"
+        android:layout_height="573dp"
         android:background="@drawable/ic_rectangle_51"
-        android:clipToPadding="false"
-        android:paddingTop="60dp"
-        android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892">
+        app:layout_constraintVertical_bias="0.747">
 
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <TableRow
-        android:id="@+id/tableRow"
-        android:layout_width="374dp"
-        android:layout_height="39dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerViewBudget"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerViewBudget"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/recyclerViewBudget"
-        app:layout_constraintTop_toTopOf="@+id/recyclerViewBudget"
-        app:layout_constraintVertical_bias="0.063">
-
-        <TextView
-            android:id="@+id/textView6"
-            style="@style/labelStyling"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:text="@string/record_no"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView7"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.158" />
-
-        <TextView
-            android:id="@+id/textView7"
-            style="@style/labelStyling"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="@string/date_from"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView8"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.157" />
-
-        <TextView
-            android:id="@+id/textView9"
-            style="@style/labelStyling"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="@string/date_to"
-            android:textAlignment="center"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewBudget"
+            android:layout_width="375dp"
+            android:layout_height="493dp"
+            android:layout_marginBottom="4dp"
+            android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.157" />
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/textView8"
-            style="@style/labelStyling"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/amount"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView9"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.157" />
+        </androidx.recyclerview.widget.RecyclerView>
 
-    </TableRow>
+        <TableRow
+            android:id="@+id/tableRow"
+            android:layout_width="373dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerViewBudget"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <TextView
+                android:id="@+id/textView6"
+                style="@style/labelStyling"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:text="@string/record_no"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView7"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.158" />
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/labelStyling"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/date_from"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView8"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.157" />
+
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/labelStyling"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/date_to"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.157" />
+
+            <TextView
+                android:id="@+id/textView8"
+                style="@style/labelStyling"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/amount"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView9"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.157" />
+
+        </TableRow>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    <TableLayout-->
-<!--        android:id="@+id/reportTable"-->
-<!--        android:layout_width="325dp"-->
-<!--        android:layout_height="556dp"-->
-<!--        android:background="@drawable/ic_rectangle_51"-->
-<!--        android:padding="20dp"-->
-<!--        tools:layout_editor_absoluteX="95dp"-->
-<!--        tools:layout_editor_absoluteY="429dp">-->
+    <!--        android:id="@+id/reportTable"-->
+    <!--        android:layout_width="325dp"-->
+    <!--        android:layout_height="556dp"-->
+    <!--        android:background="@drawable/ic_rectangle_51"-->
+    <!--        android:padding="20dp"-->
+    <!--        tools:layout_editor_absoluteX="95dp"-->
+    <!--        tools:layout_editor_absoluteY="429dp">-->
 
-<!--    </TableLayout>-->
+    <!--    </TableLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

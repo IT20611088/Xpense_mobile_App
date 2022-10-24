@@ -1,4 +1,4 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.budget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.xpensemobileapp.R;
+import com.example.xpensemobileapp.budget.Budget;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,7 +36,7 @@ public class BudgetFormActivity extends AppCompatActivity {
         budgetAmount = findViewById(R.id.editTextAmount);
 
         //Buttons
-        btnAddBudget = (Button) findViewById(R.id.btnAddBudget);
+        btnAddBudget = findViewById(R.id.btnAddBudget);
 
         //Budget object
         budget = new Budget();

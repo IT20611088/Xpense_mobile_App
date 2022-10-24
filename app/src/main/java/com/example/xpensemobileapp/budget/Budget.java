@@ -1,4 +1,4 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.budget;
 
 public class Budget {
     private String date_from;

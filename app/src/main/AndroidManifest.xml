@@ -14,16 +14,16 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".UpdateBudgetFormActivity"
+            android:name=".budget.UpdateBudgetFormActivity"
             android:exported="false" />
         <activity
-            android:name=".BudgetReportActivity"
+            android:name=".budget.BudgetReportActivity"
             android:exported="false" />
         <activity
-            android:name=".BudgetFormActivity"
+            android:name=".budget.BudgetFormActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".budget.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
