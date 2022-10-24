@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_budget_report.xml" value="0.28940217391304346" />
-        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_main.xml" value="0.1259259259259259" />
-        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_update_budget_form.xml" value="0.33" />
-        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/table_row_item.xml" value="0.33" />
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/drawable/ic_add.xml" value="0.3665" />
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_budget_form.xml" value="0.33" />
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_budget_report.xml" value="0.358695652173913" />
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_update_budget_form.xml" value="0.36666666666666664" />
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/table_row_item.xml" value="0.358695652173913" />
       </map>
     </option>
   </component>
