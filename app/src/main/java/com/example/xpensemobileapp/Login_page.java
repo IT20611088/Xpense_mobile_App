@@ -104,7 +104,7 @@ public class Login_page extends AppCompatActivity {
     }
 
     private void showHomepage() {
-        Intent intent = new Intent(this, TtestingHome.class);
+        Intent intent = new Intent(this, Navigation_drawer.class);
         startActivity(intent);
         finish();
     }

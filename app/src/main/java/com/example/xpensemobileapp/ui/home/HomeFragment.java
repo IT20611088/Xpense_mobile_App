@@ -36,9 +36,9 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
 
-//        // Initialize Firebase Auth
-//        FirebaseAuth auth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = auth.getCurrentUser();
+        // Initialize Firebase Auth
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
 //
 //        textHome = getView().findViewById(R.id.textView17);
 //

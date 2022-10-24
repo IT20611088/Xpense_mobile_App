@@ -45,6 +45,11 @@
     <string name="this_month_income">This month income</string>
     <string name="this_week_income">This Week income</string>
     <string name="today_income">Today income</string>
+
+    <string name="this_month_expense">This month expense</string>
+    <string name="this_week_expense">This Week expense</string>
+    <string name="today_expense">Today expense</string>
+
     <string name="income">Income</string>
     <string name="expense">Expense</string>
 

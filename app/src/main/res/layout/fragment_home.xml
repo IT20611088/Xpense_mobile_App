@@ -96,7 +96,7 @@
             <TextView
                 android:layout_weight="1"
                 android:padding="3dip"
-                android:text="@string/this_month_income"
+                android:text="@string/today_income"
                 android:textColor="@color/black" />
 
             <TextView
@@ -198,7 +198,7 @@
             <TextView
                 android:layout_weight="1"
                 android:padding="3dip"
-                android:text="@string/this_week_income"
+                android:text="@string/today_expense"
                 android:textColor="@color/black" />
 
             <TextView
@@ -214,7 +214,7 @@
             <TextView
                 android:layout_weight="1"
                 android:padding="3dip"
-                android:text="@string/this_week_income"
+                android:text="@string/this_week_expense"
                 android:textColor="@color/black" />
 
             <TextView
@@ -230,7 +230,7 @@
             <TextView
                 android:layout_weight="1"
                 android:padding="3dip"
-                android:text="@string/this_week_income"
+                android:text="@string/this_month_expense"
                 android:textColor="@color/black" />
 
             <TextView

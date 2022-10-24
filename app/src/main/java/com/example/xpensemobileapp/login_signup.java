@@ -16,6 +16,7 @@ import java.util.Objects;
 public class login_signup extends AppCompatActivity {
 
     Button button;
+
     private FirebaseAuth mAuth;
 
     @Override
@@ -44,10 +45,23 @@ public class login_signup extends AppCompatActivity {
                 openNewActivity();
             }
         });
+
+        button = (Button) findViewById(R.id.button2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openNewActivitysignup();
+            }
+        });
     }
 
     public void openNewActivity(){
         Intent intent = new Intent(this, Login_page.class);
+        startActivity(intent);
+    }
+
+    public void openNewActivitysignup(){
+        Intent intent = new Intent(this, SignUp_page.class);
         startActivity(intent);
     }
 }
