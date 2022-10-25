@@ -12,6 +12,46 @@
       </map>
     </option>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/button_bg_transparent.xml" value="0.2585" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/custom_login_btn.xml" value="0.2265" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/custom_signup_btn.xml" value="0.2095" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2235" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/ic_menu_camera.xml" value="0.208" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.208" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.208" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/login_button_style.xml" value="0.2585" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/side_nav_bar.xml" value="0.208" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/sign_up.xml" value="0.2265" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/textbox_borders.xml" value="0.123" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout-land/nav_header_navigation_drawer.xml" value="0.43333333333333335" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_home_page.xml" value="0.17552083333333332" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_login_page.xml" value="0.264" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_login_signup.xml" value="0.264" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_navigation_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_navigation_drawer2.xml" value="0.14427083333333332" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_sign_up_page.xml" value="0.264" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_test_for_mid.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_ttesting_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/app_bar_navigation_drawer.xml" value="0.17518248175182483" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/content_navigation_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_note.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_settings.xml" value="0.253125" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/nav_header_navigation_drawer.xml" value="0.25" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/menu/navigation_drawer.xml" value="0.25416666666666665" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2235" />
+        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.124" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

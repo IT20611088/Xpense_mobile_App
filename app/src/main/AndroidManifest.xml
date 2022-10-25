@@ -14,27 +14,32 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".budget.UpdateBudgetFormActivity"
+            android:name=".Navigation_drawer"
+            android:exported="false"
+            android:theme="@style/Theme.XpenseMobileApp.NoActionBar"/>
+        <activity
+            android:name=".TtestingHome"
             android:exported="false" />
         <activity
-            android:name=".budget.BudgetReportActivity"
+            android:name=".SignUp_page"
             android:exported="false" />
         <activity
-            android:name=".budget.BudgetFormActivity"
+            android:name=".Login_page"
             android:exported="false" />
         <activity
-            android:name=".budget.MainActivity"
+            android:name=".login_signup"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
