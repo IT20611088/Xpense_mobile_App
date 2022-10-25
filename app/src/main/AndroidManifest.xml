@@ -14,9 +14,12 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".Add_income"
+            android:exported="false" />
+        <activity
             android:name=".Navigation_drawer"
             android:exported="false"
-            android:theme="@style/Theme.XpenseMobileApp.NoActionBar"/>
+            android:theme="@style/Theme.XpenseMobileApp.NoActionBar" />
         <activity
             android:name=".TtestingHome"
             android:exported="false" />
@@ -32,10 +35,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
