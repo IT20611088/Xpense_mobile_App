@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +35,7 @@ public class DatabaseHelper {
     //Get all budget records from database
     protected void readBudget(final BudgetDataStatus budgetDataStatus) {
         //User ID
-        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         dbRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,7 +73,7 @@ public class DatabaseHelper {
     //Add new budget record to database
     public void addBudget(Budget budget, final BudgetDataStatus dataStatus){
         //User Id
-        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         String key = dbRef.child(userId).push().getKey();
         dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -87,7 +88,7 @@ public class DatabaseHelper {
     //Update a budget record
     public void updateBudget(Budget budget, String key, final BudgetDataStatus budgetDataStatus){
         //User ID
-        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -99,7 +100,7 @@ public class DatabaseHelper {
     //Delete a budget record
     public void  deleteBudget(String key, BudgetDataStatus budgetDataStatus){
         //User ID
-        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         dbRef.child(userId).child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

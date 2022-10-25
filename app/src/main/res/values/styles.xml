@@ -27,8 +27,6 @@
         <item name="backgroundTint">@color/btn_blue</item>
     </style>
 
-<resources>
-
     //common blue button
     <style name="button_text">
         <item name="android:textColor">@color/white</item>
