@@ -2,6 +2,7 @@ package com.example.xpensemobileapp.budget;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xpensemobileapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -30,7 +32,13 @@ public class BudgetReportActivity extends AppCompatActivity {
         new DatabaseHelper().readBudget(new DatabaseHelper.BudgetDataStatus() {
             @Override
             public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
-               new RecyclerViewAdapter().initRecyclerView(recyclerView, BudgetReportActivity.this, budgetArrayList, keys);
+                Log.i("Is Empty", String.valueOf(budgetArrayList.isEmpty()));
+               if(budgetArrayList.isEmpty() == false){
+                   new RecyclerViewAdapter().initRecyclerView(recyclerView, BudgetReportActivity.this, budgetArrayList, keys);
+               }
+               else{
+                   Snackbar.make(findViewById(android.R.id.content), "Budget data is empty.", Snackbar.LENGTH_SHORT).show();
+               }
             }
 
             @Override
@@ -49,25 +57,11 @@ public class BudgetReportActivity extends AppCompatActivity {
             }
         });
 
-    }
+    };
 
-
-
+    //Direct to add budget
     protected void addBudget(View view) {
         Intent intent = new Intent(BudgetReportActivity.this, BudgetFormActivity.class);
         startActivity(intent);
     }
-
-//    protected void updateBudget(View view) {
-//
-//        Intent intent = new Intent(BudgetReportActivity.this, UpdateBudgetFormActivity.class);
-//        TableRow tableRow = new TableRow(this);
-//        int rowId = tableRow.getId();
-//        intent.putExtra(row_id, rowId);
-//
-//
-//        startActivity(intent);
-//
-//
-//    }
 }

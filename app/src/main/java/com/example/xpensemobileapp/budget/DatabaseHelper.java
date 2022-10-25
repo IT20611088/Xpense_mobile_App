@@ -28,34 +28,37 @@ public class DatabaseHelper {
     }
 
     public DatabaseHelper(){
-        dbRef = FirebaseDatabase.getInstance().getReference().child("Budget");
+        dbRef = FirebaseDatabase.getInstance().getReference().child("user_budgets");
     }
 
     //Get all budget records from database
     protected void readBudget(final BudgetDataStatus budgetDataStatus) {
+        //User ID
+        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
 
-        dbRef.addValueEventListener(new ValueEventListener() {
+        dbRef.child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     budgetArrayList.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
+                            //Assign retrieved values to a budget object
+                            Budget budget = new Budget();
+                            budget.setDate_from(ds.child("date_from").getValue().toString());
+                            budget.setDate_to(ds.child("date_to").getValue().toString());
+                            budget.setAmount(Double.parseDouble(ds.child("amount").getValue().toString()));
 
-                        //Assign retrieved values to a budget object
-                        Budget budget = new Budget();
-                        budget.setDate_from(ds.child("date_from").getValue().toString());
-                        budget.setDate_to(ds.child("date_to").getValue().toString());
-                        budget.setAmount(Double.parseDouble(ds.child("amount").getValue().toString()));
-
-                        //Insert created budget object to ArrayList
-                        budgetArrayList.add(budget);
-                        keys.add(String.valueOf(ds.getKey()));
+                            //Insert created budget object to ArrayList
+                            budgetArrayList.add(budget);
+                            keys.add(String.valueOf(ds.getKey()));
                     }
 
                    budgetDataStatus.DataIsLoaded(budgetArrayList, keys);
 
                 } else {
-                    Log.i("DB Err", "DB IS EMPTY");
+                    budgetArrayList.clear();
+                    keys.clear();
+                    budgetDataStatus.DataIsLoaded(budgetArrayList, keys);
                 }
             }
 
@@ -68,8 +71,11 @@ public class DatabaseHelper {
 
     //Add new budget record to database
     public void addBudget(Budget budget, final BudgetDataStatus dataStatus){
-        String key = dbRef.push().getKey();
-        dbRef.child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
+        //User Id
+        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+
+        String key = dbRef.child(userId).push().getKey();
+        dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 dataStatus.DataIsInserted();
@@ -80,7 +86,9 @@ public class DatabaseHelper {
 
     //Update a budget record
     public void updateBudget(Budget budget, String key, final BudgetDataStatus budgetDataStatus){
-        dbRef.child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
+        //User ID
+        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+        dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 budgetDataStatus.DataIsUpdated();
@@ -90,7 +98,10 @@ public class DatabaseHelper {
 
     //Delete a budget record
     public void  deleteBudget(String key, BudgetDataStatus budgetDataStatus){
-        dbRef.child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+        //User ID
+        String userId = "1AdnczM7GEPrKFzgZuBDvGcFqD33";
+
+        dbRef.child(userId).child(key).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 budgetDataStatus.DataIsDeleted();
