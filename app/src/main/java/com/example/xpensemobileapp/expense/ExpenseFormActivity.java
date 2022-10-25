@@ -1,30 +1,26 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.expense;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
 
 import android.app.DatePickerDialog;
-import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.ParseException;
+import com.example.xpensemobileapp.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivity {
@@ -45,7 +41,6 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
     private EditText payee;
     private EditText description;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,7 +51,10 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         this.payee = findViewById(R.id.payeeValue);
         this.description = findViewById(R.id.descriptionValue);
 
+        //if()
+        //Log.i("intentVal", getIntent().getExtras().getString("id"));
 
+        //TextView amountLbl = findViewById(R.id.amountLabel);
 
         this.paymentMethod = findViewById(R.id.methodValue);
        //create an ArrayAdapter using the string array and a default spinner layout
@@ -133,27 +131,12 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
     public void addExpense(View view) {
         //get the values of the input fields
-
         String amountTxt = this.amount.getText().toString();
-        //double amountVal = Double.parseDouble(amountTxt);
-
-        //this.currencyType = findViewById(R.id.currencyValue);
         String currencyTxt = this.currencyType.getSelectedItem().toString();
-
-        //this.paymentMethod = findViewById(R.id.methodValue);
         String methodTxt = this.paymentMethod.getSelectedItem().toString();
-
-       //this.date = findViewById(R.id.dateValue);
-       String dateTxt = this.date.getText().toString();
-       // Date dateVal = new SimpleDateFormat("dd/MM/yyyy").parse(dateTxt);
-
-        //this.payee = findViewById(R.id.payeeValue);
+        String dateTxt = this.date.getText().toString();
         String payeeTxt = this.payee.getText().toString();
-
-        //this.categoryType = findViewById(R.id.categoryValue);
         String categoryTxt = this.categoryType.getSelectedItem().toString();
-
-        //this.description = findViewById(R.id.descriptionValue);
         String descriptionTxt = description.getText().toString();
 
        // checking whether any of the above fields are empty
@@ -164,7 +147,31 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         }
 
         else{
-            //
+            //create new object of ExpenseForm class
+            ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
+            categoryTxt, descriptionTxt);
+
+            new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
+                @Override
+                public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                }
+
+                @Override
+                public void DataIsInserted() {
+                    Toast.makeText(getApplicationContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void DataIsUpdated() {
+
+                }
+
+                @Override
+                public void DataIsDeleted() {
+
+                }
+            });
         }
 
     }

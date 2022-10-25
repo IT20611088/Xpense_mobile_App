@@ -1,14 +1,13 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.expense;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.xpensemobileapp.R;
 
 import java.util.ArrayList;
 
@@ -24,10 +23,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "test.my.recyclerview.RecyclerViewAdapter";
 
     private ArrayList<String> expenseNo = new ArrayList<String>();
+    private ArrayList<String> expenseDate = new ArrayList<>();
+    private ArrayList<String> expenseID = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> expenseNo, Context mContext) {
+    public RecyclerViewAdapter(ArrayList<String> expenseNo, ArrayList<String> expenseDate,
+                               ArrayList<String> expenseID, Context mContext) {
         this.expenseNo = expenseNo;
+        this.expenseDate = expenseDate;
+        this.expenseID = expenseID;
         this.mContext = mContext;
     }
 
@@ -45,7 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d(TAG, "onBindViewHolder: called");
         //Glide.with(mContext).asBitmap().load(mImage.get(position)).into(holder.image);
 
-        holder.textView.setText(expenseNo.get(position));
+        holder.db_id.setText(expenseID.get(position));
+        holder.expenseNo.setText(expenseNo.get(position));
+        holder.date.setText(expenseDate.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,13 +66,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
        // ImageView imageView;
-        TextView textView;
+        TextView db_id;
+        TextView expenseNo;
+        ImageButton imgBtn;
+        TextView date;
         RelativeLayout parentLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //imageView = itemView.findViewById(R.id.imageView);
-            textView = itemView.findViewById(R.id.expenseNo);
+            db_id = itemView.findViewById(R.id.db_id);
+            expenseNo = itemView.findViewById(R.id.expenseNo);
+            date = itemView.findViewById(R.id.date);
+
+            imgBtn = itemView.findViewById(R.id.imageButtonArrow);
+
             parentLayout = itemView.findViewById(R.id.parent_layout);
+
+            imgBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ExpenseOverviewActivity.class);
+                    intent.putExtra("id", db_id.getText().toString());
+//                    intent.putExtra("amount", )
+
+
+                    mContext.startActivity(intent);
+                }
+            });
         }
+
     }
 }

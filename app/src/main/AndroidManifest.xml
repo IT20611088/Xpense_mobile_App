@@ -2,19 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.xpensemobileapp">
-
-    <!--Provide access to camera-->
+    <!-- Provide access to camera -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
 
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
-
-
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -27,24 +20,27 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".ExpensesDashboardActivity"
+            android:name=".expense.EditExpenseActivity"
             android:exported="false" />
         <activity
-            android:name=".ExpenseOverviewActivity"
+            android:name=".expense.ExpensesDashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".ExpenseReportOverviewActivity"
+            android:name=".expense.ExpenseOverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".ExpenseReportActivity"
+            android:name=".expense.ExpenseReportOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".expense.ExpenseReportActivity"
             android:exported="false"
-            android:parentActivityName=".ExpenseFormActivity" />
+            android:parentActivityName=".expense.ExpenseFormActivity" />
         <activity
-            android:name=".ExpenseFormActivity"
+            android:name=".expense.ExpenseFormActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".expense.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".expense.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

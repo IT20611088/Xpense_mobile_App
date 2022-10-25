@@ -18,8 +18,9 @@
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/font/.xml" value="0.18425925925925926" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/font/dsda.xml" value="0.265625" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/font/my_fonts.xml" value="0.23333333333333334" />
+        <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_edit_expense.xml" value="0.4" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_expense_form.xml" value="0.23645833333333333" />
-        <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_expense_overview.xml" value="0.23645833333333333" />
+        <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_expense_overview.xml" value="0.4" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_expense_report.xml" value="0.23645833333333333" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_expense_report_overview.xml" value="0.23645833333333333" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/activity_expenses_dashboard.xml" value="0.23645833333333333" />
@@ -30,7 +31,7 @@
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/fragment_graphical_representation.xml" value="0.2365815528921313" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/fragment_report_summary.xml" value="0.72" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/fragment_uploaded_image.xml" value="0.4" />
-        <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/recycler_view_list.xml" value="0.23645833333333333" />
+        <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/recycler_view_list.xml" value="0.4" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/simple_spinner_item.xml" value="0.23541666666666666" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/spinner_dropdown_list.xml" value="0.4" />
         <entry key="..\:/SLIIT Projects/Year 2/Sem 2/MAD/Xpense_mobile_App/app/src/main/res/layout/spinner_item.xml" value="0.23645833333333333" />

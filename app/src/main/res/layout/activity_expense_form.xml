@@ -5,7 +5,7 @@
     android:id="@+id/payMethodType"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExpenseFormActivity"
+    tools:context=".expense.ExpenseFormActivity"
     android:background="@color/white">
 
     <TextView
@@ -257,7 +257,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/uploadedImageFragmentContainer"
-            android:name="com.example.xpensemobileapp.UploadedImageFragment"
+            android:name="com.example.xpensemobileapp.expense.UploadedImageFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"

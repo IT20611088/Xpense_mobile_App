@@ -1,10 +1,12 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.expense;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.xpensemobileapp.R;
 
 
 public class ExpenseOverviewImageFragment extends Fragment {

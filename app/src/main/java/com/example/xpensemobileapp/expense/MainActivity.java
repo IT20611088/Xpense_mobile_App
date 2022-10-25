@@ -1,10 +1,12 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.expense;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.xpensemobileapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

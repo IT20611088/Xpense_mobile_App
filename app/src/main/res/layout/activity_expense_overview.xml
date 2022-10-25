@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExpenseOverviewActivity"
+    tools:context=".expense.ExpenseOverviewActivity"
     android:background="@color/white">
 
     <TextView
@@ -21,27 +21,27 @@
 
     <TextView
         android:id="@+id/overviewAmountLabel"
+        style="@style/expenseOverviewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="32dp"
         android:text="@string/overviewAmountLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expenseOverviewTitle"
 
-        style="@style/expenseOverviewLabels"/>
+        app:layout_constraintTop_toBottomOf="@+id/expenseOverviewTitle" />
 
     <TextView
-        android:id="@+id/overviewPayeeLabel"
+        android:id="@+id/overviewCurrencyLabel"
+        style="@style/expenseOverviewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
-        android:text="@string/overviewPayeeLabel"
+        android:text="@string/overviewCurrencyLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewAmountLabel"
 
-        style="@style/expenseOverviewLabels"/>
+        app:layout_constraintTop_toBottomOf="@+id/overviewAmountLabel" />
 
     <TextView
         android:id="@+id/overviewMethodLabel"
@@ -51,7 +51,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/overviewMethodLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewPayeeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/overviewCurrencyLabel"
 
         style="@style/expenseOverviewLabels"/>
 
@@ -68,16 +68,16 @@
         style="@style/expenseOverviewLabels"/>
 
     <TextView
-        android:id="@+id/overviewCurrencyLabel"
+        android:id="@+id/overviewPayeeLabel"
+        style="@style/expenseOverviewLabels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="16dp"
-        android:text="@string/overviewCurrencyLabel"
+        android:text="@string/overviewPayeeLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewDateLabel"
 
-        style="@style/expenseOverviewLabels"/>
+        app:layout_constraintTop_toBottomOf="@+id/overviewDateLabel" />
 
     <TextView
         android:id="@+id/overviewCategoryLabel"
@@ -87,7 +87,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/overviewCategoryLabel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overviewCurrencyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/overviewPayeeLabel"
 
         style="@style/expenseOverviewLabels"/>
 
@@ -108,77 +108,81 @@
         style="@style/expenseOverviewLabelValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:text="@string/overviewAmountLabelValue"
+        android:layout_marginStart="20dp"
+
+        android:gravity="center"
         app:layout_constraintBaseline_toBaselineOf="@+id/overviewAmountLabel"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/overviewPayeeLabelValue"
-        style="@style/expenseOverviewLabelValues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="86dp"
-        android:text="@string/overviewPayeeLabelValue"
-        app:layout_constraintBaseline_toBaselineOf="@+id/overviewPayeeLabel"
-
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/overviewMethodLabelValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
-        android:text="@string/overviewMethodLabelValue"
-        app:layout_constraintBaseline_toBaselineOf="@+id/overviewMethodLabel"
         app:layout_constraintEnd_toEndOf="parent"
-
-        style="@style/expenseOverviewLabelValues"/>
-
-    <TextView
-        android:id="@+id/overviewDateLabelValue"
-        style="@style/expenseOverviewLabelValues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="63dp"
-        android:text="@string/overviewDateLabelValue"
-        app:layout_constraintBaseline_toBaselineOf="@+id/overviewDateLabel"
-
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/overviewAmountLabel" />
 
     <TextView
         android:id="@+id/overviewCurrencyLabelValue"
         style="@style/expenseOverviewLabelValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="105dp"
-        android:text="@string/overviewCurrencyLabelValue"
-        app:layout_constraintBaseline_toBaselineOf="@+id/overviewCurrencyLabel"
+        android:layout_marginStart="63dp"
+        android:gravity="center"
 
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewCurrencyLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewCurrencyLabel" />
+
+    <TextView
+        android:id="@+id/overviewMethodLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:gravity="center"
+
+        android:layout_marginEnd="36dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewMethodLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewMethodLabel" />
+
+    <TextView
+        android:id="@+id/overviewDateLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="63dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewDateLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewDateLabel" />
+
+    <TextView
+        android:id="@+id/overviewPayeeLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="105dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewPayeeLabel"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewPayeeLabel" />
 
     <TextView
         android:id="@+id/overviewCategoryLabelValue"
         style="@style/expenseOverviewLabelValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="74dp"
-        android:text="@string/overviewCategoryLabel"
-        app:layout_constraintBaseline_toBaselineOf="@+id/overviewCategoryLabel"
+        android:layout_marginEnd="83dp"
 
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewCategoryLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewCategoryLabel" />
 
     <TextView
         android:id="@+id/overviewDescriptionLabelValue"
         style="@style/expenseOverviewLabelValues"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="71dp"
-        android:text="@string/overviewDescriptionLabelValue"
 
+        android:text=" "
         app:layout_constraintBaseline_toBaselineOf="@+id/overviewDescriptionLabel"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewDescriptionLabel" />
 
     <ImageButton
         android:id="@+id/expenseOverviewEditBtn"
@@ -240,7 +244,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/expenseOverviewImagePreview"
-            android:name="com.example.xpensemobileapp.ExpenseOverviewImageFragment"
+            android:name="com.example.xpensemobileapp.expense.ExpenseOverviewImageFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

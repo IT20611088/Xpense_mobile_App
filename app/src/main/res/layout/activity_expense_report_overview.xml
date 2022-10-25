@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExpenseReportOverviewActivity"
+    tools:context=".expense.ExpenseReportOverviewActivity"
     android:background="@color/white">
 
     <TextView
@@ -46,7 +46,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/graphicalRepresentationFragment"
-            android:name="com.example.xpensemobileapp.GraphicalRepresentationFragment"
+            android:name="com.example.xpensemobileapp.expense.GraphicalRepresentationFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

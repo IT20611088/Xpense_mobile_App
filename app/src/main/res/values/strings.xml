@@ -151,4 +151,8 @@
 
     <!--#########################################################################################-->
 
+    <!--EditExpenseActivity strings-->
+    <string name="editExpenseTitle">Edit Expense</string>
+    <string name="expenseSaveBtn">SAVE</string>
+
 </resources>

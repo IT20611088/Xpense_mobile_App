@@ -1,19 +1,24 @@
-package com.example.xpensemobileapp;
+package com.example.xpensemobileapp.expense;
 
 import java.util.Date;
 
 public class ExpenseForm {
 
-    private double amount;
+    private String amount;
     private String currency;
     private String method;
-    private Date date;
+    private String date;
     private String payee;
     private String category;
     private String description;
 
-    public ExpenseForm(double amount, String currency, String method, Date date, String payee,
-                       String category, String description){
+    public ExpenseForm(){
+
+    }
+
+    //overloaded constructor
+    public ExpenseForm(String amount, String currency, String method, String date, String payee,
+                       String category, String description) {
         this.amount = amount;
         this.currency = currency;
         this.method = method;
@@ -23,11 +28,11 @@ public class ExpenseForm {
         this.description = description;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
@@ -47,11 +52,11 @@ public class ExpenseForm {
         this.method = method;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

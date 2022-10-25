@@ -5,7 +5,7 @@
     android:id="@+id/expenseReport"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExpenseReportActivity"
+    tools:context=".expense.ExpenseReportActivity"
     android:background="@color/white">
 
     <TextView

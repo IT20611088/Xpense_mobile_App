@@ -34,7 +34,7 @@
         android:layout_marginStart="114dp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imageButtonArrow"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentTop="true"
@@ -43,11 +43,31 @@
         android:layout_marginEnd="5dp"
         android:background="@drawable/button_tap_selector"
 
-        android:onClick="onClickArrow"
         android:scaleType="fitCenter"
 
         app:srcCompat="@drawable/right_arrow_icon"
 
         />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expenseNo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="19dp"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/db_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:text="TextView" />
 
 </RelativeLayout>
