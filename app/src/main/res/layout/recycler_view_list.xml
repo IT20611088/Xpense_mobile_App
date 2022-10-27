@@ -29,9 +29,11 @@
         style="@style/expenseNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/db_id"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="114dp" />
+        android:layout_centerInParent="true"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="1dp" />
 
     <ImageButton
         android:id="@+id/imageButtonArrow"
@@ -51,23 +53,25 @@
 
     <TextView
         android:id="@+id/date"
+        style="@style/expenseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/expenseNo"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="24dp"
         android:layout_toEndOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/db_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="6dp"
-        android:text="TextView" />
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="-1dp"
+        android:text="TextView"
+        android:visibility="invisible" />
 
 </RelativeLayout>

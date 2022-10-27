@@ -119,18 +119,13 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
                         @Override
                         public void DataIsDeleted() {
                             Toast.makeText(getApplicationContext(), "Expense deleted successfully", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(getApplicationContext(), ExpensesDashboardActivity.class);
+                            startActivity(intent);
                         }
                     });
                 }
-//                switch (which){
-//                    case DialogInterface.BUTTON_POSITIVE:
-//                        //Yes button clicked
-//                        break;
 //
-//                    case DialogInterface.BUTTON_NEGATIVE:
-//                        //No button clicked
-//                        break;
-//                }
             }
         };
 
