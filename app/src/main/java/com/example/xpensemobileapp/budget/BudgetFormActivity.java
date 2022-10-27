@@ -2,25 +2,27 @@ package com.example.xpensemobileapp.budget;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 import com.example.xpensemobileapp.R;
-import com.example.xpensemobileapp.budget.Budget;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class BudgetFormActivity extends AppCompatActivity {
     //DB Reference
@@ -35,6 +37,9 @@ public class BudgetFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_form);
+
+        setTitle("Budget");
+
 
 
 
@@ -59,9 +64,6 @@ public class BudgetFormActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
-                dbRef = FirebaseDatabase.getInstance().getReference().child("Budget");
-
                 if(TextUtils.isEmpty(budgetDateFrom.getText().toString()))
                     Snackbar.make(view, "Please Enter a date", Snackbar.LENGTH_SHORT).show();
                 else if(TextUtils.isEmpty(budgetDateTo.getText().toString()))
@@ -69,33 +71,39 @@ public class BudgetFormActivity extends AppCompatActivity {
                 else if(TextUtils.isEmpty(budgetAmount.getText().toString()))
                     Snackbar.make(view, "Please Enter a amount", Snackbar.LENGTH_SHORT).show();
                 else{
-                    //Get user inputs
-                    budget.setDate_from(budgetDateFrom.getText().toString());
-                    budget.setDate_to(budgetDateTo.getText().toString());
-                    budget.setAmount(Double.parseDouble(budgetAmount.getText().toString()));
 
-                    new DatabaseHelper().addBudget(budget, new DatabaseHelper.BudgetDataStatus(){
+                    if(compareDate(budgetDateFrom.getText().toString(), budgetDateTo.getText().toString())) {
+                        //Get user inputs
+                        budget.setDate_from(budgetDateFrom.getText().toString());
+                        budget.setDate_to(budgetDateTo.getText().toString());
+                        budget.setAmount(Double.parseDouble(budgetAmount.getText().toString()));
 
-                        @Override
-                        public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
+                        new DatabaseHelper().addBudget(budget, new DatabaseHelper.BudgetDataStatus() {
 
-                        }
+                            @Override
+                            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
 
-                        @Override
-                        public void DataIsInserted() {
-                            Snackbar.make(view, "Budget successfully added", Snackbar.LENGTH_SHORT).show();
-                        }
+                            }
 
-                        @Override
-                        public void DataIsUpdated() {
+                            @Override
+                            public void DataIsInserted() {
+                                Snackbar.make(view, "Budget successfully added", Snackbar.LENGTH_SHORT).show();
+                            }
 
-                        }
+                            @Override
+                            public void DataIsUpdated() {
 
-                        @Override
-                        public void DataIsDeleted() {
+                            }
 
-                        }
-                    });
+                            @Override
+                            public void DataIsDeleted() {
+
+                            }
+                        });
+                    }
+                    else {
+                        Snackbar.make(view, "Please check entered date values", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -104,28 +112,49 @@ public class BudgetFormActivity extends AppCompatActivity {
     protected  void openMaterialDatePicker(View view){
 
         //Instantiate Material Date Picker
-        MaterialDatePicker.Builder  materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker();
+        MaterialDatePicker.Builder<Long> materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker();
 
         //Assign a title
         materialDatePickerBuilder.setTitleText("Pickup a date");
 
         //
-        final MaterialDatePicker materialDatePicker = materialDatePickerBuilder.build();
+        final MaterialDatePicker<Long> materialDatePicker = materialDatePickerBuilder.build();
 
         materialDatePicker.show(getSupportFragmentManager(), "Material_Date_Picker");
 
         //Set Value to EditText
-        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
             @Override
-            public void onPositiveButtonClick(Object selection) {
+            public void onPositiveButtonClick(Long selection) {
+                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                calendar.setTimeInMillis(selection);
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                String date = format.format(calendar.getTime());
                 if(view.getId()==R.id.editTextDateFrom){
-                    budgetDateFrom.setText(materialDatePicker.getHeaderText());
+                    budgetDateFrom.setText(date);
                 }
                 else if(view.getId()==R.id.editTextDateTo){
-                    budgetDateTo.setText(materialDatePicker.getHeaderText());
+                    budgetDateTo.setText(date);
                 }
             }
         });
 
     }
+
+
+    protected boolean compareDate(String dateFromString, String dateToString) {
+        try {
+            Date dateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromString);
+            @SuppressLint("SimpleDateFormat") Date dateTo = new SimpleDateFormat("dd/MM/yyyy").parse(dateToString);
+
+            if(dateTo!=null&&dateFrom!=null&&dateTo.compareTo(dateFrom)>0){
+                return true;
+            }
+            else return false;
+        }
+        catch (ParseException e){
+            Log.i("Execption", String.valueOf(e));
+            return false;
+        }
+    };
 }

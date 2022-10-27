@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DatabaseHelper {
 
@@ -89,6 +88,7 @@ public class DatabaseHelper {
     public void updateBudget(Budget budget, String key, final BudgetDataStatus budgetDataStatus){
         //User ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

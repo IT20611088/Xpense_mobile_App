@@ -36,10 +36,10 @@
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
+        app:layout_constraintVertical_bias="0.952"
         app:srcCompat="@drawable/ic_add" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,17 +52,26 @@
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.867">
+        app:layout_constraintVertical_bias="0.423">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/linearProgressBar"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerViewBudget"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerViewBudget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerViewBudget" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewBudget"
-            android:layout_width="368dp"
-            android:layout_height="518dp"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
             android:layout_marginBottom="4dp"
             android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent">
 
         </androidx.recyclerview.widget.RecyclerView>

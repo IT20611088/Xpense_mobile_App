@@ -29,8 +29,8 @@ public class TtestingHome extends AppCompatActivity {
         FirebaseUser currentUser = auth.getCurrentUser();
 
 
-        tvFirstName = findViewById(R.id.textView3);
-        tvEmail = findViewById(R.id.textView13);
+        tvFirstName = findViewById(R.id.tvFirstName);
+        tvEmail = findViewById(R.id.tvEmail);
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -40,7 +40,7 @@ public class TtestingHome extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                if (user != null) {
+                if (tvFirstName != null) {
                     tvFirstName.setText(user.name);
                     tvEmail.setText(user.email);
                 }

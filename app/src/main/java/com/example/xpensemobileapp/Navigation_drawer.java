@@ -105,13 +105,16 @@ public class Navigation_drawer extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                if (user != null) {
-//                    tvFirstName.setText(user.name);
-//                    tvEmail.setText(user.email);
+                if (tvFirstName != null) {
+                    tvFirstName.setText(user.name);
+                    tvEmail.setText(user.email);
 //                    tvFirstName.setText("test");
 //                 tvEmail.setText("test");
 
                     Log.d("test", user.name);
+                }
+                else{
+                    Log.i("afknkafkhsgkh", user.name);
                 }
             }
 

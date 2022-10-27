@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +17,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class UpdateBudgetFormActivity extends AppCompatActivity {
 
@@ -30,6 +37,8 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_budget_form);
+
+        setTitle("Budget");
 
         //Edit text fields
         budgetDateFrom = findViewById(R.id.editTextDateFrom);
@@ -55,14 +64,6 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
 
     //Update function
     protected void updateBudget(View view){
-
-        //Set user inputs to a Budget object
-        budget = new Budget();
-        budget.setDate_from(budgetDateFrom.getText().toString());
-        budget.setDate_to(budgetDateTo.getText().toString());
-        budget.setAmount(Double.parseDouble(budgetAmount.getText().toString()));
-
-
         //Alert Dialog box
         MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(view.getContext());
 
@@ -72,27 +73,47 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
                 .setPositiveButton("Update", new DialogInterface.OnClickListener(){
                     @Override
                     public void  onClick(DialogInterface dialog, int i){
-                        new DatabaseHelper().updateBudget(budget, key, new DatabaseHelper.BudgetDataStatus() {
-                            @Override
-                            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
 
+                        if(TextUtils.isEmpty(budgetDateFrom.getText().toString()))
+                            Snackbar.make(view, "Please Enter a date", Snackbar.LENGTH_SHORT).show();
+                        else if(TextUtils.isEmpty(budgetDateTo.getText().toString()))
+                            Snackbar.make(view, "Please Enter a date", Snackbar.LENGTH_SHORT).show();
+                        else if(TextUtils.isEmpty(budgetAmount.getText().toString()))
+                            Snackbar.make(view, "Please Enter a amount", Snackbar.LENGTH_SHORT).show();
+                        else{
+                            //Set user inputs to a Budget object
+                            budget = new Budget();
+                            budget.setDate_from(budgetDateFrom.getText().toString());
+                            budget.setDate_to(budgetDateTo.getText().toString());
+                            budget.setAmount(Double.parseDouble(budgetAmount.getText().toString()));
+
+                            if(compareDate(budgetDateFrom.getText().toString(), budgetDateTo.getText().toString())){
+                                new DatabaseHelper().updateBudget(budget, key, new DatabaseHelper.BudgetDataStatus() {
+                                    @Override
+                                    public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsInserted() {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsUpdated() {
+                                        Snackbar.make(view, "Budget has been successfully updated", Snackbar.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void DataIsDeleted() {
+
+                                    }
+                                });
                             }
-
-                            @Override
-                            public void DataIsInserted() {
-
+                            else{
+                                Snackbar.make(view, "Please check entered date values", Snackbar.LENGTH_SHORT).show();
                             }
-
-                            @Override
-                            public void DataIsUpdated() {
-                                Snackbar.make(view, "Budget has been successfully updated", Snackbar.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void DataIsDeleted() {
-
-                            }
-                        });
+                        }
                         dialog.dismiss();
                     }
                 })
@@ -169,22 +190,44 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
         materialDatePickerBuilder.setTitleText("Pickup a date");
 
         //
-        final MaterialDatePicker materialDatePicker = materialDatePickerBuilder.build();
+        final MaterialDatePicker<Long> materialDatePicker = materialDatePickerBuilder.build();
 
         materialDatePicker.show(getSupportFragmentManager(), "Material_Date_Picker");
 
         //Set Value to EditText
-        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
             @Override
-            public void onPositiveButtonClick(Object selection) {
+            public void onPositiveButtonClick(Long selection) {
+                Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                calendar.setTimeInMillis(selection);
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                String date = format.format(calendar.getTime());
+                Log.i("++++++++++++++++++++++++++++++", date);
                 if(view.getId()==R.id.editTextDateFrom){
-                    budgetDateFrom.setText(materialDatePicker.getHeaderText());
+                    budgetDateFrom.setText(date);
                 }
                 else if(view.getId()==R.id.editTextDateTo){
-                    budgetDateTo.setText(materialDatePicker.getHeaderText());
+                    budgetDateTo.setText(date);
                 }
             }
         });
 
-    }
+    };
+
+    //Compare Dates
+    protected boolean compareDate(String dateFromString, String dateToString) {
+        try {
+            Date dateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromString);
+            Date dateTo = new SimpleDateFormat("dd/MM/yyyy").parse(dateToString);
+
+            if(dateTo.compareTo(dateFrom)>0){
+                return true;
+            }
+            else return false;
+        }
+        catch (ParseException e){
+            Log.i("Execption", String.valueOf(e));
+            return false;
+        }
+    };
 }
