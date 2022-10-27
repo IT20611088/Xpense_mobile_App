@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -140,10 +141,20 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         String descriptionTxt = description.getText().toString();
 
        // checking whether any of the above fields are empty
-        if(amountTxt.matches("") || dateTxt.matches("") || payeeTxt.matches("") || descriptionTxt.matches("")){
-            String infomsg = "Please fill all the empty fields";
+        if(amountTxt.matches("")){
+            Snackbar.make(view, "Please input a value for amount", Snackbar.LENGTH_SHORT).show();
+        }
 
-            Toast.makeText(this, infomsg, Toast.LENGTH_SHORT).show();
+        else if(dateTxt.matches("")){
+            Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(payeeTxt.matches("")){
+            Snackbar.make(view, "Please input a value for payee", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(descriptionTxt.matches("")){
+            Snackbar.make(view, "Please input a value for description", Snackbar.LENGTH_SHORT).show();
         }
 
         else{

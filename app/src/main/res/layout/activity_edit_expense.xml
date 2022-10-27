@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".expense.EditExpenseActivity">
+
+
+    <TextView
+        android:id="@+id/editExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/editExpenseTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        style="@style/expenseOverviewTitle"/>
+
+    <TextView
+        android:id="@+id/editAmountLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/amount"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/editPayeeLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/payee"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/editDateLabel" />
+
+    <TextView
+        android:id="@+id/editMethodLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/method"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/editCurrencyLabel" />
+
+    <TextView
+        android:id="@+id/editDateLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/date"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/editMethodLabel" />
+
+    <TextView
+        android:id="@+id/editCurrencyLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/currency"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/editAmountLabel" />
+
+    <TextView
+        android:id="@+id/editCategoryLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="27dp"
+        android:text="@string/category"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/editPayeeLabel" />
+
+    <TextView
+        android:id="@+id/editDescriptionLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/description"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/editCategoryLabel" />
+
+
+
+    <EditText
+        android:id="@+id/editAmountValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="@string/amountHint"
+        android:inputType="numberDecimal"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/editAmountLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editPayeeValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="@string/payeeHint"
+        android:inputType="textPersonName"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/editPayeeLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editDateValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+
+        android:focusableInTouchMode="false"
+
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editDateLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/editMethodValue"
+        style="@style/valueStyling"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+
+        android:layout_marginEnd="17dp"
+        android:backgroundTint="@color/black"
+
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:popupBackground="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCurrencyValue" />
+
+    <Spinner
+        android:id="@+id/editCurrencyValue"
+        style="@style/valueStyling"
+        android:layout_width="166dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="17dp"
+
+        android:backgroundTint="@color/black"
+
+        android:popupBackground="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAmountValue" />
+
+    <EditText
+        android:id="@+id/editDescriptionValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/descriptionHint"
+        android:inputType="textMultiLine"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/editDescriptionLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/editCategoryValue"
+        style="@style/valueStyling"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="17dp"
+        android:backgroundTint="@color/black"
+
+        android:popupBackground="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPayeeValue" />
+
+    <Button
+        android:id="@+id/expenseSaveButton"
+        style="@style/addBtnStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:onClick="onClickSaveBtn"
+
+        android:backgroundTint="@color/add_generate_color"
+
+        android:text="@string/expenseSaveBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDescriptionValue">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/uploadedImageFragmentContainer"
+            android:name="com.example.xpensemobileapp.expense.UploadedImageFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/uploadImageText"
+        style="@style/uploadImageTextStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/uploadImageText"
+        app:layout_constraintBottom_toTopOf="@+id/expenseSaveButton"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.616"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/uploadImageBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/button_tap_selector"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/upload_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
