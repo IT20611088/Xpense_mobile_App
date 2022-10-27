@@ -177,7 +177,7 @@
     </style>
 
     <style name="expenseOverviewLabelValues">
-        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:fontFamily">@font/roboto_light_italic</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
