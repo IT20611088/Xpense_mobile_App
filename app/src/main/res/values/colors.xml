@@ -14,4 +14,8 @@
     <color name="btn_border_color">#002CA7</color>
     <color name="add_generate_color">#1039B2</color>
     <color name="dashboard_add_btn_color">#ff6161</color>
+    <color name="blue">#1039B2</color>
+    <color name="green">#00A34B</color>
+    <color name="red">#FF0000</color>
+    <color name="blur_blue">#889CD9</color>
 </resources>

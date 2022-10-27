@@ -14,11 +14,30 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Xpense"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
+        <activity
+            android:name=".Add_income"
+            android:exported="false" />
+        <activity
+            android:name=".Navigation_drawer"
+            android:exported="false"
+            android:theme="@style/Theme.XpenseMobileApp.NoActionBar" />
+        <activity
+            android:name=".TtestingHome"
+            android:exported="false" />
+        <activity
+            android:name=".SignUp_page"
+            android:exported="false" />
+        <activity
+            android:name=".Login_page"
+            android:exported="false" />
+        <activity
+            android:name=".login_signup"
+            android:exported="false" />
         <activity
             android:name=".expense.EditExpenseActivity"
             android:exported="false" />
