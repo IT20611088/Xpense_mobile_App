@@ -64,4 +64,158 @@
     <string name="menu_gallery">Gallery</string>
 
 
+    <string name="headingName">EXPENSE</string>
+    <string name="amount">Amount</string>
+    <string name="payee">Payee</string>
+    <string name="method">Method</string>
+    <string name="date">Date</string>
+    <string name="currency">Currency</string>
+    <string name="category">Category</string>
+    <string name="description">Description</string>
+
+    <!--hints for the input fields-->
+    <string name="amountHint">Ex- 2000.00</string>
+    <string name="payeeHint">Ex- Bank</string>
+    <string name="descriptionHint">Ex- Made a bank transfer today</string>
+
+
+    <!--list of choices for the spinner to select expense method-->
+    <string-array name="paymentTypes">
+        <item>Cash</item>
+        <item>Master/Visa</item>
+        <item>Cheque</item>
+        <item>E-Money</item>
+    </string-array>
+
+
+    <!--list of choices for the spinner to select currency type-->
+    <!--limited for only 4 types currently-->
+    <string-array name="currencyTypes">
+        <item>LKR</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+    </string-array>
+
+
+    <!--list of choices for the spinner to select category type-->
+    <string-array name="categoryTypes">
+        <item>Food &amp; Beverage</item>
+        <item>Transportation</item>
+        <item>Utilities</item>
+        <item>Medicine &amp; Healthcare</item>
+        <item>Personal spending</item>
+        <item>Entertainment</item>
+        <item>Charity</item>
+        <item>Household work</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--text for add button-->
+    <string name="addBtnName">ADD</string>
+
+    <!--upload image saying-->
+    <string name="uploadImageText">Upload image (optional)</string>
+
+    <!--##################################################################################################-->
+
+    <!--ExpenseReportActivity strings-->
+    <string name="mainTitle">Expense Report</string>
+
+    <!--report type selection button stylings-->
+    <string name="dailyBtn">DAILY</string>
+    <string name="customBtn">CUSTOM</string>
+
+
+    <!--text for current date label-->
+    <string name="currentDateText">Date</string>
+
+    <!--text for hint of the current date -->
+    <string name="currentDateValueHint">dd/mm/yyyy</string>
+
+
+    <!--text for "from" date label-->
+    <string name="fromDateText">From</string>
+
+    <!--text for "to" date label-->
+    <string name="toDateText">To</string>
+
+    <!--text for hint of the "to" date-->
+    <string name="toDateValueHint">dd/mm/yyyy</string>
+
+    <!--text for generate button-->
+    <string name="generateBtnTxt">GENERATE</string>
+
+
+    <!--##################################################################################################-->
+
+
+    <!--ExpenseReportOverviewActivity strings-->
+    <string name="overviewTitle">Expense Report Overview</string>
+    <string name="graphTitle">Graphical Representation</string>
+    <string name="summaryTitle">Report Summary</string>
+
+    <!--Report Summary strings-->
+    <string name="reportNo">Report#</string>
+    <string name="name">Name</string>
+    <string name="summaryDate">Date</string>
+    <string name="totIncome">Total Income</string>
+    <string name="totExpense">Total Expense</string>
+    <string name="netIncome">Net Income</string>
+
+    <string name="reportNoValue">R_001</string>
+    <string name="nameValue">Billy Adams</string>
+    <string name="summaryDateValue">7/9/2022</string>
+    <string name="totIncomeValue">28500.00</string>
+    <string name="totExpenseValue">6500.00</string>
+    <string name="netIncomeValue">22000.00</string>
+    <string name="title_activity_expenses_dashboard">ExpensesDashboardActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <!--############################################################################################-->
+
+    <!--ExpensesDashboardActivity strings-->
+    <string name="expensesDashboardTitle">Expenses</string>
+    <string name="recentTitle">Recent</string>
+    <string name="expenseNo">ex_001</string>
+
+
+    <!--########################################################################################################-->
+
+    <!--ExpenseOverviewActivity strings-->
+    <string name="expenseOverviewTitle">Expense Overview</string>
+
+    <string name="overviewAmountLabel">Amount</string>
+    <string name="overviewPayeeLabel">Payee</string>
+    <string name="overviewMethodLabel">Method</string>
+    <string name="overviewDateLabel">Date</string>
+    <string name="overviewCurrencyLabel">Currency</string>
+    <string name="overviewCategoryLabel">Category</string>
+    <string name="overviewDescriptionLabel">Description</string>
+
+    <string name="overviewAmountLabelValue">2000.00</string>
+    <string name="overviewPayeeLabelValue">Nolimit</string>
+    <string name="overviewMethodLabelValue">Cash</string>
+    <string name="overviewDateLabelValue">15/9/2022</string>
+    <string name="overviewCurrencyLabelValue">LKR</string>
+    <string name="overviewCategoryLabelValue">Clothing</string>
+    <string name="overviewDescriptionLabelValue">Shopping</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--#########################################################################################-->
+
+    <!--EditExpenseActivity strings-->
+    <string name="editExpenseTitle">Edit Expense</string>
+    <string name="expenseSaveBtn">SAVE</string>
+
 </resources>
