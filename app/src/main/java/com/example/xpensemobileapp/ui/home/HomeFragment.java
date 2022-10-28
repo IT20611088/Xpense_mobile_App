@@ -1,9 +1,12 @@
 package com.example.xpensemobileapp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.xpensemobileapp.R;
 import com.example.xpensemobileapp.User;
 import com.example.xpensemobileapp.databinding.FragmentHomeBinding;
+import com.example.xpensemobileapp.expense.ExpensesDashboardActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +29,10 @@ public class HomeFragment extends Fragment {
 
 //    TextView textHome;
 
+
     private FragmentHomeBinding binding;
+
+    private ImageButton expenseBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +41,16 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        this.expenseBtn = (ImageButton)root.findViewById(R.id.imageButton2) ;
+
+        this.expenseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), ExpensesDashboardActivity.class));
+            }
+        });
+
 
 
         // Initialize Firebase Auth
