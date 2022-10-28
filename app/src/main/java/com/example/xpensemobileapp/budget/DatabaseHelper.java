@@ -19,20 +19,23 @@ public class DatabaseHelper {
     private DatabaseReference dbRef;
     private ArrayList<Budget> budgetArrayList = new ArrayList<>();
     private ArrayList<String> keys = new ArrayList<>();
+    private ArrayList<String> budgetNo = new ArrayList<>();
 
     public interface BudgetDataStatus{
-        void DataIsLoaded(ArrayList<Budget> budgetArrayList,  ArrayList<String> keys);
+        void DataIsLoaded(ArrayList<Budget> budgetArrayList,  ArrayList<String> keys, ArrayList<String> budgetNo);
         void DataIsInserted();
         void DataIsUpdated();
         void DataIsDeleted();
     }
 
     public DatabaseHelper(){
+
         dbRef = FirebaseDatabase.getInstance().getReference().child("user_budgets");
     }
 
     //Get all budget records from database
     protected void readBudget(final BudgetDataStatus budgetDataStatus) {
+
         //User ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -41,24 +44,27 @@ public class DatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     budgetArrayList.clear();
+                    int count = 0;
                     for (DataSnapshot ds : snapshot.getChildren()) {
                             //Assign retrieved values to a budget object
-                            Budget budget = new Budget();
-                            budget.setDate_from(ds.child("date_from").getValue().toString());
-                            budget.setDate_to(ds.child("date_to").getValue().toString());
-                            budget.setAmount(Double.parseDouble(ds.child("amount").getValue().toString()));
 
-                            //Insert created budget object to ArrayList
-                            budgetArrayList.add(budget);
-                            keys.add(String.valueOf(ds.getKey()));
+                        Budget budget = new Budget();
+                        budget.setDate_from(ds.child("date_from").getValue().toString());
+                        budget.setDate_to(ds.child("date_to").getValue().toString());
+                        budget.setAmount(Double.parseDouble(ds.child("amount").getValue().toString()));
+
+                        //Insert created budget object to ArrayList
+                        budgetNo.add(String.valueOf(++count));
+                        budgetArrayList.add(budget);
+                        keys.add(String.valueOf(ds.getKey()));
                     }
 
-                   budgetDataStatus.DataIsLoaded(budgetArrayList, keys);
+                   budgetDataStatus.DataIsLoaded(budgetArrayList, keys, budgetNo);
 
                 } else {
                     budgetArrayList.clear();
                     keys.clear();
-                    budgetDataStatus.DataIsLoaded(budgetArrayList, keys);
+                    budgetDataStatus.DataIsLoaded(budgetArrayList, keys, budgetNo);
                 }
             }
 

@@ -36,10 +36,10 @@
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.952"
+        app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/ic_add" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423">
+        app:layout_constraintVertical_bias="0.495">
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/linearProgressBar"
@@ -67,7 +67,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewBudget"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="480dp"
             android:layout_marginBottom="4dp"
             android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,17 +151,6 @@
         </TableRow>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--    <TableLayout-->
-    <!--        android:id="@+id/reportTable"-->
-    <!--        android:layout_width="325dp"-->
-    <!--        android:layout_height="556dp"-->
-    <!--        android:background="@drawable/ic_rectangle_51"-->
-    <!--        android:padding="20dp"-->
-    <!--        tools:layout_editor_absoluteX="95dp"-->
-    <!--        tools:layout_editor_absoluteY="429dp">-->
-
-    <!--    </TableLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

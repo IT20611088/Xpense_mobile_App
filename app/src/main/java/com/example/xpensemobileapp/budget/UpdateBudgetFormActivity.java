@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.xpensemobileapp.R;
@@ -90,7 +89,7 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
                             if(compareDate(budgetDateFrom.getText().toString(), budgetDateTo.getText().toString())){
                                 new DatabaseHelper().updateBudget(budget, key, new DatabaseHelper.BudgetDataStatus() {
                                     @Override
-                                    public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
+                                    public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys, ArrayList<String> budgetNo) {
 
                                     }
 
@@ -143,7 +142,7 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
 
                         new DatabaseHelper().deleteBudget(key, new DatabaseHelper.BudgetDataStatus() {
                             @Override
-                            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
+                            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys, ArrayList<String> budgetNo) {
 
                             }
 

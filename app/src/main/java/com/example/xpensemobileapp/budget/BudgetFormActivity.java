@@ -81,7 +81,7 @@ public class BudgetFormActivity extends AppCompatActivity {
                         new DatabaseHelper().addBudget(budget, new DatabaseHelper.BudgetDataStatus() {
 
                             @Override
-                            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
+                            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys, ArrayList<String> budgetNo) {
 
                             }
 

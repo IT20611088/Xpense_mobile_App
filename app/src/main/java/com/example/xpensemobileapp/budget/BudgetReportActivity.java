@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.OnSwipe;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.xpensemobileapp.R;
@@ -27,6 +28,7 @@ public class BudgetReportActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_report);
 
@@ -38,11 +40,10 @@ public class BudgetReportActivity extends AppCompatActivity {
 
         new DatabaseHelper().readBudget(new DatabaseHelper.BudgetDataStatus() {
             @Override
-            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys) {
-                Log.i("Is Empty", String.valueOf(budgetArrayList.isEmpty()));
-               if(budgetArrayList.isEmpty() == false){
-                    findViewById(R.id.linearProgressBar).setVisibility(View.GONE);
-                   new RecyclerViewAdapter().initRecyclerView(recyclerView, BudgetReportActivity.this, budgetArrayList, keys);
+            public void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys, ArrayList<String> budgetNo) {
+               if(!budgetArrayList.isEmpty()){
+                   findViewById(R.id.linearProgressBar).setVisibility(View.GONE);
+                   new RecyclerViewAdapter().initRecyclerView(recyclerView, BudgetReportActivity.this, budgetArrayList, keys, budgetNo);
                }
                else{
                    findViewById(R.id.linearProgressBar).setVisibility(View.GONE);

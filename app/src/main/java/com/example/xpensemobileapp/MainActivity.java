@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        FirebaseDatabase.getInstance().getReference().keepSynced(true);
+
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         timer = new Timer();
@@ -28,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 1000);
 
     }
 

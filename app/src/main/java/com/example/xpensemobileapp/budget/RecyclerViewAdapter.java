@@ -23,9 +23,9 @@ public class RecyclerViewAdapter {
     private Context mContext;
     private BudgetAdapter budgetAdapter;
 
-    public void initRecyclerView(RecyclerView recyclerView, Context context, ArrayList<Budget> budgetArrayList, ArrayList<String> keys){
+    public void initRecyclerView(RecyclerView recyclerView, Context context, ArrayList<Budget> budgetArrayList, ArrayList<String> keys, ArrayList<String> budgetNo){
         mContext = context;
-        budgetAdapter = new BudgetAdapter(budgetArrayList, keys );
+        budgetAdapter = new BudgetAdapter(budgetArrayList, keys, budgetNo);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(budgetAdapter);
     }
@@ -66,8 +66,8 @@ public class RecyclerViewAdapter {
             });
         }
 
-        public void bind(Budget budget, String key) {
-            editTxtRecordNo.setText("2");
+        public void bind(Budget budget, String key, String no) {
+            editTxtRecordNo.setText(String.valueOf(no));
             editTxtDateFrom.setText(budget.getDate_from());
             editTxtDateTo.setText(budget.getDate_to());
             editTxtAmount.setText(String.format("%.2f", budget.getAmount()));
@@ -79,10 +79,12 @@ public class RecyclerViewAdapter {
 
         private ArrayList<Budget> budgetArray;
         private ArrayList<String> keys;
+        private ArrayList<String> budgetNo;
 
-        public BudgetAdapter(ArrayList<Budget> budgetArray, ArrayList<String> keys) {
+        public BudgetAdapter(ArrayList<Budget> budgetArray, ArrayList<String> keys, ArrayList<String> budgetNo) {
             this.budgetArray = budgetArray;
             this.keys = keys;
+            this.budgetNo = budgetNo;
         }
 
 
@@ -94,7 +96,7 @@ public class RecyclerViewAdapter {
 
         @Override
         public void onBindViewHolder(@NonNull BudgetReportView holder, int position) {
-            holder.bind(budgetArray.get(position), keys.get(position));
+            holder.bind(budgetArray.get(position), keys.get(position), budgetNo.get(position));
         }
 
         @Override
