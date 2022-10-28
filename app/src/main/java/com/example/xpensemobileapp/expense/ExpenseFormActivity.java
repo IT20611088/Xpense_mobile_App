@@ -19,8 +19,11 @@ import android.widget.Toast;
 import com.example.xpensemobileapp.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -130,7 +133,7 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         this.date.setText(dateFormat.format(myCalendar.getTime()));
     }
 
-    public void addExpense(View view) {
+    public void addExpense(View view) throws ParseException {
         //get the values of the input fields
         String amountTxt = this.amount.getText().toString();
         String currencyTxt = this.currencyType.getSelectedItem().toString();
@@ -140,13 +143,23 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         String categoryTxt = this.categoryType.getSelectedItem().toString();
         String descriptionTxt = description.getText().toString();
 
-       // checking whether any of the above fields are empty
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateCurrent = new Date();
+
+        Date date=formatter.parse(dateTxt);
+
+
+        // checking whether any of the above fields are empty
         if(amountTxt.matches("")){
             Snackbar.make(view, "Please input a value for amount", Snackbar.LENGTH_SHORT).show();
         }
 
         else if(dateTxt.matches("")){
             Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(date.after(dateCurrent)){
+            Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
         }
 
         else if(payeeTxt.matches("")){
@@ -170,7 +183,7 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
                 @Override
                 public void DataIsInserted() {
-                    Toast.makeText(getApplicationContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
                 }
 
                 @Override

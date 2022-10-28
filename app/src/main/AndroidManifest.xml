@@ -41,13 +41,15 @@
             android:exported="false" />
         <activity
             android:name=".expense.EditExpenseActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".expense.ExpensesDashboardActivity"
             android:exported="false" />
         <activity
             android:name=".expense.ExpenseOverviewActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".expense.ExpensesDashboardActivity"/>
         <activity
             android:name=".expense.ExpenseReportOverviewActivity"
             android:exported="false" />
@@ -58,7 +60,7 @@
         <activity
             android:name=".expense.ExpenseFormActivity"
             android:exported="false"
-            android:parentActivityName=".expense.MainActivity" />
+            android:parentActivityName=".expense.ExpensesDashboardActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -129,7 +130,8 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
 
 
     private void getExpenseData(){
-        this.dbRef = FirebaseDatabase.getInstance().getReference("expenses");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        this.dbRef = FirebaseDatabase.getInstance().getReference("user_expenses").child(userId);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
