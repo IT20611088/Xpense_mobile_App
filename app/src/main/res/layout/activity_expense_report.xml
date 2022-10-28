@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expenseReport"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".expense.ExpenseReportActivity"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/mainTitle"
+        style="@style/mainTitleStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto_med"
+        android:text="@string/mainTitle"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CalendarView
+        android:id="@+id/calenderValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+        android:theme="@style/CalenderViewCustom"
+        android:dateTextAppearance="@style/CalenderViewDateCustomText"/>
+
+    <TextView
+        android:id="@+id/currentDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/currentDateText"
+        app:layout_constraintEnd_toStartOf="@+id/currentDateValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calenderValue"
+
+        style="@style/labelStyling"/>
+
+    <TextView
+        android:id="@+id/currentDateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:hint="@string/currentDateValueHint"
+
+        style="@style/hintStylings"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/currentDateLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/generateBtn"
+        style="@style/generateBtnStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClickGenerateBtn"
+        android:text="@string/generateBtnTxt"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dailyBtn"
+        style="@style/clickedBtnStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:onClick="onClickDailyBtn"
+
+        android:text="@string/dailyBtn"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mainTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/customBtn"
+        style="@style/defaultBtnStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:onClick="onClickCustomBtn"
+
+        android:text="@string/customBtn"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mainTitle"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/toLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/toDateText"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/toDateValue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentDateLabel"
+
+        tools:text="@string/toDateText" />
+
+    <TextView
+        android:id="@+id/toDateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="120dp"
+        android:hint="@string/toDateValueHint"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/toLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        style="@style/hintStylings"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:onClick="moveToNext"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@+id/toDateValue"
+        tools:layout_editor_absoluteX="148dp" />/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

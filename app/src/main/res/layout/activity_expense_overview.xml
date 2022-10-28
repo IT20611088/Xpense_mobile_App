@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".expense.ExpenseOverviewActivity"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/expenseOverviewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/expenseOverviewTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        style="@style/expenseOverviewTitle"/>
+
+    <TextView
+        android:id="@+id/overviewAmountLabel"
+        style="@style/expenseOverviewLabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/overviewAmountLabel"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/expenseOverviewTitle" />
+
+    <TextView
+        android:id="@+id/overviewCurrencyLabel"
+        style="@style/expenseOverviewLabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/overviewCurrencyLabel"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/overviewAmountLabel" />
+
+    <TextView
+        android:id="@+id/overviewMethodLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/overviewMethodLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewCurrencyLabel"
+
+        style="@style/expenseOverviewLabels"/>
+
+    <TextView
+        android:id="@+id/overviewDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/overviewDateLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewMethodLabel"
+
+        style="@style/expenseOverviewLabels"/>
+
+    <TextView
+        android:id="@+id/overviewPayeeLabel"
+        style="@style/expenseOverviewLabels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/overviewPayeeLabel"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/overviewDateLabel" />
+
+    <TextView
+        android:id="@+id/overviewCategoryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/overviewCategoryLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewPayeeLabel"
+
+        style="@style/expenseOverviewLabels"/>
+
+    <TextView
+        android:id="@+id/overviewDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/overviewDescriptionLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewCategoryLabel"
+
+        style="@style/expenseOverviewLabels" />
+
+    <TextView
+        android:id="@+id/overviewAmountLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+
+        android:gravity="center"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewAmountLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewAmountLabel" />
+
+    <TextView
+        android:id="@+id/overviewCurrencyLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:gravity="center"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewCurrencyLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewCurrencyLabel" />
+
+    <TextView
+        android:id="@+id/overviewMethodLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:gravity="center"
+
+        android:layout_marginEnd="36dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewMethodLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewMethodLabel" />
+
+    <TextView
+        android:id="@+id/overviewDateLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="63dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewDateLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewDateLabel" />
+
+    <TextView
+        android:id="@+id/overviewPayeeLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="105dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewPayeeLabel"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewPayeeLabel" />
+
+    <TextView
+        android:id="@+id/overviewCategoryLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="83dp"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewCategoryLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewCategoryLabel" />
+
+    <TextView
+        android:id="@+id/overviewDescriptionLabelValue"
+        style="@style/expenseOverviewLabelValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text=" "
+        app:layout_constraintBaseline_toBaselineOf="@+id/overviewDescriptionLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/overviewDescriptionLabel" />
+
+    <ImageButton
+        android:id="@+id/expenseOverviewEditBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_tap_selector"
+        android:onClick="onClickEditBtn"
+
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/edit_icon" />
+
+    <ImageButton
+        android:id="@+id/expenseOverviewDownloadBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_tap_selector"
+        android:scaleType="fitCenter"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/expenseOverviewDeleteBtn"
+        app:layout_constraintStart_toEndOf="@+id/expenseOverviewEditBtn"
+        app:srcCompat="@drawable/download_icon" />
+
+    <ImageButton
+        android:id="@+id/expenseOverviewDeleteBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_tap_selector"
+        android:onClick="onClickDeleteBtn"
+        android:scaleType="fitCenter"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/dustbin_icon" />
+
+    <LinearLayout
+        android:id="@+id/expenseOverviewImageContainer"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/black"
+        android:orientation="vertical"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/overviewDescriptionLabel">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/expenseOverviewImagePreview"
+            android:name="com.example.xpensemobileapp.expense.ExpenseOverviewImageFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
