@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.xpensemobileapp">
+    <!-- Provide access to camera -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +21,7 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".IncomeReportOverviewActivity"
+            android:name=".income.IncomeReportOverviewActivity"
             android:exported="false" />
         <activity
             android:name=".IncomeReportActivity"
@@ -35,12 +42,20 @@
             android:name=".Add_income"
             android:exported="false" />
         <activity
+            android:name=".expense.EditExpenseActivity"
+            android:exported="false"
+            />
+        <activity
             android:name=".Navigation_drawer"
             android:exported="false"
             android:theme="@style/Theme.XpenseMobileApp.NoActionBar" />
         <activity
             android:name=".TtestingHome"
             android:exported="false" />
+        <activity
+            android:name=".expense.ExpenseOverviewActivity"
+            android:exported="false"
+            android:parentActivityName=".expense.ExpensesDashboardActivity"/>
         <activity
             android:name=".SignUp_page"
             android:exported="false" />
@@ -50,6 +65,10 @@
         <activity
             android:name=".login_signup"
             android:exported="false" />
+        <activity
+            android:name=".expense.ExpenseFormActivity"
+            android:exported="false"
+            android:parentActivityName=".expense.ExpensesDashboardActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

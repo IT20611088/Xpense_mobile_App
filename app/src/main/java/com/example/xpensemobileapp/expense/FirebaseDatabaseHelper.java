@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +21,7 @@ public class FirebaseDatabaseHelper {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReferenceExpense;
     private List<ExpenseForm> expenses = new ArrayList<>();
+    private String userId;
 
     public interface DataStatus{
         void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys);
@@ -29,16 +31,21 @@ public class FirebaseDatabaseHelper {
     }
 
     public FirebaseDatabaseHelper(){
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         this.mDatabase = FirebaseDatabase.getInstance();
-        this.mReferenceExpense = this.mDatabase.getReference("expenses");
+        this.mReferenceExpense = this.mDatabase.getReference("user_expenses").child(userId);
     }
 
 
     public void readExpenses(final DataStatus dataStatus){
+
         this.mReferenceExpense.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 expenses.clear();
+
+                Log.i("=====================", String.valueOf(expenses.isEmpty()));
+
                 List<String> keys = new ArrayList<>();
 
                 for(DataSnapshot keyNode : snapshot.getChildren()){
