@@ -6,11 +6,12 @@ import android.os.Bundle;
 
 import com.example.xpensemobileapp.R;
 
-public class Add_income extends AppCompatActivity {
+public class IncomeReportOverviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_income);
+        setContentView(R.layout.activity_income_report_overview);
+
     }
 }

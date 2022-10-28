@@ -157,7 +157,7 @@
 
     <!--Report Summary strings-->
     <string name="reportNo">Report#</string>
-    <string name="name">Name</string>
+
     <string name="summaryDate">Date</string>
     <string name="totIncome">Total Income</string>
     <string name="totExpense">Total Expense</string>
