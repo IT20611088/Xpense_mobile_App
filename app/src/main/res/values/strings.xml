@@ -154,6 +154,15 @@
     <string name="editExpenseTitle">Edit Expense</string>
     <string name="expenseSaveBtn">SAVE</string>
 
+    <string name="add_budget">Add Budget</string>
+    <string name="date_from">From</string>
+    <string name="date_to">To</string>
+    <string name="amount">Amount (LKR)</string>
+    <string name="update_budget">Update Budget</string>
+    <string name="hint_date">dd/mm/yyyy</string>
+    <string name="hint_amount">1000.00</string>
+    <string name="budget">Budget</string>
+    <string name="record_no">No.</string>
     <string name="splash_screen_logo">splash screen logo</string>
     <string name="expense_blue_logo">expense_blue_logo</string>
     <string name="login">Log In</string>
@@ -217,6 +226,7 @@
 
     <string name="incomeOverviewTitle">Income Overview</string>
     <string name="menu_gallery">Gallery</string>
+    <string name="title_activity_main2">MainActivity2</string>
 
 
 </resources>
