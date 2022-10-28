@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Xpense mobile App</string>
+    <string name="app_name">FirebaseNotes</string>
+    <string name="notes">Notes</string>
+    <string name="search">Search</string>
+    <string name="Title">Title</string>
+    <string name="Description">Description</string>
+    <string name="delete">Delete</string>
+    <string name="addNote">Add New Note</string>
 </resources>
