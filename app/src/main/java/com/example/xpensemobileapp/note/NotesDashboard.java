@@ -12,9 +12,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.firebasenotes.databinding.ActivityMainBinding;
-//import com.example.xpensemobileapp.note.databinding.ActivityMainBinding;
-import com.example.xpensemobileapp.note.MainActivity;
+import com.example.firebasenotes.databinding.ActivityNotesDashboardBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -26,15 +24,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    ActivityMainBinding binding;
+public class NotesDashboard extends AppCompatActivity {
+    ActivityNotesDashboardBinding binding;
     private NotesAdapter notesAdapter;
     private List<NotesModel> notesModelListss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        binding=ActivityNotesDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         notesModelListss = new ArrayList<>();
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         binding.floatingAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(MainActivity.this,AddActivity.class);
+                Intent intent= new Intent(NotesDashboard.this,AddActivity.class);
                 startActivity(intent);
             }
         });
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.cancel();
-                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(NotesDashboard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -143,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NotesDashboard.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.xpensemobileapp.note.MainActivity"
+    tools:context="com.example.xpensemobileapp.note.NotesDashboard"
     android:background="@color/white"
     android:padding="15dp"
     android:orientation="vertical">
@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/notes_row"/>
+
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingAddBtn"

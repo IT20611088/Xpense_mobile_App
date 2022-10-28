@@ -20,7 +20,7 @@
             android:name="com.example.xpensemobileapp.note.AddActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.xpensemobileapp.note.MainActivity"
+            android:name="com.example.xpensemobileapp.note.NotesDashboard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
