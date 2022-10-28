@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.firebasenotes.databinding.ActivityUpdateActitvityBinding;
+//import com.example.firebasenotes.databinding.ActivityUpdateActitvityBinding;
+import com.example.xpensemobileapp.databinding.ActivityUpdateActitvityBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +37,7 @@ public class UpdateActivity extends AppCompatActivity {
                 ProgressDialog progressDialog=new ProgressDialog(view.getContext());
                 progressDialog.setTitle("deleting");
                 FirebaseFirestore.getInstance()
-                        .collection("notess")
+                        .collection("notes")
                         .document(id)
                         .delete();
                 finish();
@@ -61,7 +62,7 @@ public class UpdateActivity extends AppCompatActivity {
         progressDialog.show();
         NotesModel notesModel = new NotesModel(id,title,description,firebaseAuth.getUid());
         FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("notess").document(id).set(notesModel)
+        firebaseFirestore.collection("notes").document(id).set(notesModel)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

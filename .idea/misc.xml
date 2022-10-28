@@ -3,38 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_add.xml" value="0.1" />
         <entry key="..\:/Xpense_mobile_App/app/src/main/res/layout/activity_main.xml" value="0.3482789855072464" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/drawable/ic_baseline_graphic_eq_24.xml" value="0.1855" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_add_income.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_edit_expense.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_edit_income.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_expense_form.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_expense_overview.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_expense_report.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_expense_report_overview.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_expenses_dashboard.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_income_dashboard.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_income_dashboard2.xml" value="0.24010416666666667" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_income_form.xml" value="0.24010416666666667" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_income_overview.xml" value="0.24010416666666667" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_login_page.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_navigation_drawer2.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/activity_ttesting_home.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/app_bar_navigation_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/content_navigation_drawer.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_expense_overview_image.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_gallery.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_graphical_representation.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_home.xml" value="0.16145833333333334" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_income_overview_image.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_note.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_uploaded_image.xml" value="0.16875" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/fragment_uploaded_image2.xml" value="0.15625" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/nav_header_navigation_drawer.xml" value="0.21041666666666667" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/recycler_view_list.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/layout/spinner_dropdown_list.xml" value="0.25416666666666665" />
-        <entry key="..\:/Android studio apps/Xpense_mobile_App/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

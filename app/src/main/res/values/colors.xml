@@ -10,7 +10,7 @@
     <color name="blackshade1">#656262</color>
     <color name="greyShade1">#877F7F</color>
     <color name="blue">#173CF1</color>
-    <color name="blue">#1039B2</color>
+<!--    <color name="blue">#1039B2</color>-->
     <color name="green">#00A34B</color>
     <color name="red">#FF0000</color>
     <color name="blur_blue">#889CD9</color>

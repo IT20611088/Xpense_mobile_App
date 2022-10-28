@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.example.firebasenotes.databinding.ActivityAddBinding;
+import com.example.xpensemobileapp.databinding.ActivityAddBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,7 +46,7 @@ public class AddActivity extends AppCompatActivity {
         String noteId= UUID.randomUUID().toString();
         NotesModel notesModel = new NotesModel(noteId,title,description,firebaseAuth.getUid());
         FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("notess").document(noteId).set(notesModel)
+        firebaseFirestore.collection("notes").document(noteId).set(notesModel)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

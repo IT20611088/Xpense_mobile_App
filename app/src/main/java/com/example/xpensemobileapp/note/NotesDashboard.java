@@ -12,7 +12,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.firebasenotes.databinding.ActivityNotesDashboardBinding;
+import com.example.xpensemobileapp.databinding.ActivityNotesDashboardBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -122,7 +122,7 @@ public class NotesDashboard extends AppCompatActivity {
     }
     private void getData(){
         FirebaseFirestore.getInstance()
-                .collection("notess")
+                .collection("notes")
                 .whereEqualTo("uid",FirebaseAuth.getInstance().getUid())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.xpensemobileapp.R;
+
 public class IncomeDashboardActivity extends AppCompatActivity {
 
     @Override

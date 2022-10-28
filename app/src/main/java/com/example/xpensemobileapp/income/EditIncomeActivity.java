@@ -123,7 +123,7 @@ public class EditIncomeActivity extends AppCompatActivity {
         this.date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(EditExpenseActivity.this, date,
+                new DatePickerDialog(EditIncomeActivity.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }

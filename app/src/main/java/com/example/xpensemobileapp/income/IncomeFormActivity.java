@@ -116,7 +116,7 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
         this.date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(ExpenseFormActivity.this, date,
+                new DatePickerDialog(IncomeFormActivity.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -189,7 +189,7 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
 
 
     public void next(View view){
-        Intent intent = new Intent(ExpenseFormActivity.this, ExpenseReportActivity.class);
+        Intent intent = new Intent(IncomeFormActivity.this, ExpenseReportActivity.class);
         startActivity(intent);
     }
 

@@ -116,7 +116,7 @@ public class IncomeOverviewActivity extends AppCompatActivity {
                         public void DataIsDeleted() {
                             Toast.makeText(getApplicationContext(), "Expense deleted successfully", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(getApplicationContext(), ExpensesDashboardActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), IncomeDashboardActivity.class);
                             startActivity(intent);
                         }
                     });
@@ -125,14 +125,14 @@ public class IncomeOverviewActivity extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseOverviewActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(IncomeOverviewActivity.this);
         builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
 
     }
 
     public void onClickEditBtn(View view){
-        Intent intent = new Intent(ExpenseOverviewActivity.this, EditExpenseActivity.class);
+        Intent intent = new Intent(IncomeOverviewActivity.this, EditIncomeActivity.class);
         intent.putExtra("id", this.expenseID);
 
         startActivity(intent);
