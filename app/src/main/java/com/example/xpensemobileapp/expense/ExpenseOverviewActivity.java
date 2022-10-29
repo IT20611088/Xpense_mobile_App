@@ -9,9 +9,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +31,10 @@ import java.util.List;
 public class ExpenseOverviewActivity extends AppCompatActivity {
 
     private String expenseID;
+    private String expenseNo;
     private DatabaseReference dbRef;
+
+    private TextView overviewTitle;
 
     private TextView amount;
     private TextView payee;
@@ -38,6 +44,9 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
     private TextView category;
     private TextView description;
 
+    private ImageButton downloadBtn;
+    //private Layout myLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +55,14 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
 
 
         this.expenseID = getIntent().getExtras().getString("id");
+        this.expenseNo = getIntent().getExtras().getString("expenseNo");
+
+        this.overviewTitle = findViewById(R.id.expenseOverviewTitle);
 
         this.amount = findViewById(R.id.overviewAmountLabelValue);
         this.amount.setEnabled(false);
+
+        this.overviewTitle.setText("Expense Overview - " + this.expenseNo);
 
         this.category = findViewById(R.id.overviewCategoryLabelValue);
         this.payee = findViewById(R.id.overviewPayeeLabelValue);
@@ -57,7 +71,14 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
         this.currency = findViewById(R.id.overviewCurrencyLabelValue);
         this.description= findViewById(R.id.overviewDescriptionLabelValue);
 
+        this.downloadBtn = findViewById(R.id.expenseOverviewDownloadBtn);
 
+        this.downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //saveOverview();
+            }
+        });
         getExpenseData();
     }
 

@@ -87,6 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, ExpenseOverviewActivity.class);
                     intent.putExtra("id", db_id.getText().toString());
+                    intent.putExtra("expenseNo", expenseNo.getText().toString());
 //                    intent.putExtra("amount", )
 
 

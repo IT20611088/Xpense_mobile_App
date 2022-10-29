@@ -1,6 +1,7 @@
 package com.example.xpensemobileapp.expense;
 
 import static android.content.ContentValues.TAG;
+import static android.view.View.GONE;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.xpensemobileapp.R;
 
@@ -37,6 +39,8 @@ public class ExpensesDashboardActivity extends AppCompatActivity {
             @Override
             public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
                 //Log.i("length", String.valueOf(expenses.size()));
+                ProgressBar progressBar = findViewById(R.id.progressBar);
+                progressBar.setVisibility(GONE);
 
                 for(int i = 0; i < expenses.size(); i++){
                     if(i < 10)

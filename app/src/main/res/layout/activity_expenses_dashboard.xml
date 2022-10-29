@@ -35,10 +35,11 @@
         android:id="@+id/myRecyclerView"
         android:layout_width="0dp"
         android:layout_height="614dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="16dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
@@ -55,5 +56,15 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/plusicon" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

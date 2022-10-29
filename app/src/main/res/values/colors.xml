@@ -22,5 +22,5 @@
     <color name="calender_Selected_date">#49f2bd</color>
     <color name="btn_border_color">#002CA7</color>
     <color name="add_generate_color">#1039B2</color>
-
+    <color name="dashboard_add_btn_color">#ff6161</color>
 </resources>
