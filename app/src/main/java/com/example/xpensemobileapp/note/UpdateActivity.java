@@ -24,6 +24,9 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityUpdateActitvityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        setTitle("Notes");
+
         Intent intent = getIntent();
         id= intent.getStringExtra("id");
         title= intent.getStringExtra("title");

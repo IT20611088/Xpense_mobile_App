@@ -39,11 +39,7 @@ public class BudgetFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget_form);
-
         setTitle("Budget");
-
-
-
 
         //Edit Text Fields
         budgetDateFrom = findViewById(R.id.editTextDateFrom);

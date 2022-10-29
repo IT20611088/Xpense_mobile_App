@@ -35,6 +35,8 @@ public class NotesDashboard extends AppCompatActivity {
         binding=ActivityNotesDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setTitle("Notes");
+
         notesModelListss = new ArrayList<>();
 
         notesAdapter= new NotesAdapter(this);
