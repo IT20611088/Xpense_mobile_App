@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent_layout"
+    android:layout_width="300dp"
+    android:layout_height="117dp"
+    android:layout_marginLeft="34dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="35dp"
+    android:background="@drawable/expense_dashboard_recycler_list_background"
+
+    android:padding="10dp"
+    android:scrollIndicators="none">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/img2" />
+
+    <TextView
+        android:id="@+id/expenseNo"
+        style="@style/expenseNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/db_id"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="1dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonArrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/button_tap_selector"
+
+        android:scaleType="fitCenter"
+
+        app:srcCompat="@drawable/right_arrow_icon"
+
+        />
+
+    <TextView
+        android:id="@+id/date"
+        style="@style/expenseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="24dp"
+        android:layout_toEndOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/db_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="-1dp"
+        android:text="TextView"
+        android:visibility="invisible" />
+
+</RelativeLayout>

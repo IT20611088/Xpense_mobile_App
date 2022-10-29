@@ -10,7 +10,17 @@
     <color name="blue_100">#1039B2</color>
     <color name="btn_blue">#1039B2</color>
     <color name="blue">#1039B2</color>
+    <color name="blackshade1">#656262</color>
+    <color name="greyShade1">#877F7F</color>
+<!--    <color name="blue">#1039B2</color>-->
     <color name="green">#00A34B</color>
     <color name="red">#FF0000</color>
     <color name="blur_blue">#889CD9</color>
+    <color name="light_blue">#42f2f5</color>
+    <color name="my_red">#FF0000</color>
+    <color name="hint_color">#838383</color>
+    <color name="calender_Selected_date">#49f2bd</color>
+    <color name="btn_border_color">#002CA7</color>
+    <color name="add_generate_color">#1039B2</color>
+
 </resources>

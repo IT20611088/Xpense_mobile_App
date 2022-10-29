@@ -23,9 +23,9 @@
         android:label="@string/menu_budget"
         tools:layout="@layout/activity_budget_report" />
 
-    <fragment
+    <activity
         android:id="@+id/nav_note"
-        android:name="com.example.xpensemobileapp.ui.note.NoteFragment"
+        android:name="com.example.xpensemobileapp.note.NotesDashboard"
         android:label="@string/menu_note"
-        tools:layout="@layout/fragment_note" />
+        tools:layout="@layout/activity_notes_dashboard" />
 </navigation>

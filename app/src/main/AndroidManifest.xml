@@ -23,6 +23,24 @@
             android:name=".budget.BudgetFormActivity"
             android:exported="false" />
         <activity
+            android:name=".income.IncomeReportOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".income.IncomeReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".expense.IncomeFormActivity"
+            android:exported="false" />
+        <activity
+            android:name=".income.EditIncomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".income.IncomeOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".income.IncomeDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".Navigation_drawer"
             android:exported="false"
             android:theme="@style/Theme.XpenseMobileApp.NoActionBar" />
@@ -39,10 +57,21 @@
             android:name=".login_signup"
             android:exported="false" />
         <activity
+            android:name="com.example.xpensemobileapp.note.UpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.xpensemobileapp.note.AddActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.xpensemobileapp.note.NotesDashboard"
+            android:exported="true"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
