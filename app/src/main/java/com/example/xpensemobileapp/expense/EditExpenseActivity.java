@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -13,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -132,13 +135,15 @@ public class EditExpenseActivity extends AppCompatActivity {
 
 
     private void getExpenseData(){
-        this.dbRef = FirebaseDatabase.getInstance().getReference("expenses");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        this.dbRef = FirebaseDatabase.getInstance().getReference("user_expenses").child(userId);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+
                     ExpenseForm expense = childSnapshot.getValue(ExpenseForm.class);
 
                     if(expenseID.equals(childSnapshot.getKey())){
@@ -180,10 +185,21 @@ public class EditExpenseActivity extends AppCompatActivity {
         String descriptionTxt = description.getText().toString();
 
         // checking whether any of the above fields are empty
-        if(amountTxt.matches("") || dateTxt.matches("") || payeeTxt.matches("") || descriptionTxt.matches("")){
-            String infomsg = "Please fill all the empty fields";
 
-            Toast.makeText(this, infomsg, Toast.LENGTH_SHORT).show();
+        if(amountTxt.matches("")){
+            Snackbar.make(view, "Please input a value for amount", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(dateTxt.matches("")){
+            Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(payeeTxt.matches("")){
+            Snackbar.make(view, "Please input a value for payee", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(descriptionTxt.matches("")){
+            Snackbar.make(view, "Please input a value for description", Snackbar.LENGTH_SHORT).show();
         }
 
         else{
@@ -203,7 +219,7 @@ public class EditExpenseActivity extends AppCompatActivity {
 
                 @Override
                 public void DataIsUpdated() {
-                    Toast.makeText(getApplicationContext(), "Expense updated successfully", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Expense updated successfully", Snackbar.LENGTH_SHORT).show();
                 }
 
                 @Override

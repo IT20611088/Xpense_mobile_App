@@ -28,4 +28,10 @@
         android:name="com.example.xpensemobileapp.note.NotesDashboard"
         android:label="@string/menu_note"
         tools:layout="@layout/activity_notes_dashboard" />
+
+    <activity
+        android:id="@+id/nav_expense_dashboard"
+        android:name="com.example.xpensemobileapp.expense.ExpensesDashboardActivity"
+        android:label="@string/expense"
+        tools:layout="@layout/activity_expenses_dashboard" />
 </navigation>

@@ -3,29 +3,38 @@ package com.example.xpensemobileapp.expense;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Layout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 public class ExpenseOverviewActivity extends AppCompatActivity {
@@ -45,7 +54,7 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
     private TextView description;
 
     private ImageButton downloadBtn;
-    //private Layout myLayout;
+    private ConstraintLayout myLayout;
 
 
     @Override
@@ -72,18 +81,57 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
         this.description= findViewById(R.id.overviewDescriptionLabelValue);
 
         this.downloadBtn = findViewById(R.id.expenseOverviewDownloadBtn);
+        this.myLayout = findViewById(R.id.myLayout);
 
         this.downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //saveOverview();
+                saveOverview();
             }
         });
         getExpenseData();
     }
 
+    private void saveOverview(){
+        this.myLayout.setDrawingCacheEnabled(true);
+        this.myLayout.buildDrawingCache();
+        this.myLayout.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+        Bitmap bitmap = this.myLayout.getDrawingCache();
+        
+        save(bitmap);
+    }
+
+    private void save(Bitmap bitmap) {
+        String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+        File file = new File(root+"/Download");
+        String filename = "expense overview.jpg";
+
+        File myFile = new File(file, filename);
+
+        if(myFile.exists()){
+            myFile.delete();
+        }
+
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream(myFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+
+            Snackbar.make(findViewById(R.id.myLayout), "Download successful", Snackbar.LENGTH_SHORT).show();
+
+            this.myLayout.setDrawingCacheEnabled(false);
+
+        } catch(Exception e){
+            Toast.makeText(this, "Error : " + e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     private void getExpenseData(){
-        this.dbRef = FirebaseDatabase.getInstance().getReference("expenses");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        this.dbRef = FirebaseDatabase.getInstance().getReference("user_expenses").child(userId);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override

@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.xpensemobileapp">
+    <!-- Provide access to camera -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -60,8 +67,27 @@
             android:name="com.example.xpensemobileapp.note.UpdateActivity"
             android:exported="false" />
         <activity
+            android:name=".expense.EditExpenseActivity"
+            android:exported="false"
+            />
+        <activity
+            android:name=".expense.ExpensesDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".expense.ExpenseOverviewActivity"
+            android:exported="false"
+            android:parentActivityName=".expense.ExpensesDashboardActivity"/>
+        <activity
             android:name="com.example.xpensemobileapp.note.AddActivity"
             android:exported="false" />
+        <activity
+            android:name=".expense.ExpenseReportActivity"
+            android:exported="false"
+            android:parentActivityName=".expense.ExpenseFormActivity" />
+        <activity
+            android:name=".expense.ExpenseFormActivity"
+            android:exported="false"
+            android:parentActivityName=".expense.ExpensesDashboardActivity" />
         <activity
             android:name="com.example.xpensemobileapp.note.NotesDashboard"
             android:exported="true"/>
@@ -71,8 +97,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

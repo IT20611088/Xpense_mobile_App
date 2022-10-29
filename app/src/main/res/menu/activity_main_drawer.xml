@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_baseline_graphic_eq_24"
             android:title="@string/menu_graph" />
         <item
+            android:id="@+id/nav_expense_dashboard"
+            android:icon="@drawable/ic_baseline_graphic_eq_24"
+            android:title="@string/menu_expense" />
+        <item
             android:id="@+id/budgetReport"
             android:icon="@drawable/ic_baseline_account_balance_wallet_24"
             android:title="@string/menu_budget" />

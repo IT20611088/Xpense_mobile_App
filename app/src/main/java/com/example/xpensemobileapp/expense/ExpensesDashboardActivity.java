@@ -30,15 +30,17 @@ public class ExpensesDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses_dashboard);
 
-        initializeContent();
+          initializeContent();
 
     }
+
 
     private void initializeContent(){
         new FirebaseDatabaseHelper().readExpenses(new FirebaseDatabaseHelper.DataStatus() {
             @Override
             public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
                 //Log.i("length", String.valueOf(expenses.size()));
+
                 ProgressBar progressBar = findViewById(R.id.progressBar);
                 progressBar.setVisibility(GONE);
 
