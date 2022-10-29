@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UpdateBudgetFormActivity extends AppCompatActivity {
 
@@ -59,7 +61,7 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
         btnDeleteBudget.setOnClickListener(this::deleteBudget);
         budgetDateFrom.setOnClickListener(this::openMaterialDatePicker);
         budgetDateTo.setOnClickListener(this::openMaterialDatePicker);
-    };
+    }
 
     //Update function
     protected void updateBudget(View view){
@@ -126,7 +128,7 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
         materialAlertDialogBuilder.show();
 
 
-    };
+    }
 
     //Delete function
     protected void deleteBudget(View view){
@@ -159,7 +161,15 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
                             @Override
                             public void DataIsDeleted() {
                                 Snackbar.make(view, "Budget has been successfully deleted", Snackbar.LENGTH_SHORT).show();
-                                //finish();
+                                Timer timer = new Timer();
+
+                                timer.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        UpdateBudgetFormActivity.this.finish();
+                                    }
+                                }, 800);
+
 
                             }
                         });
@@ -177,7 +187,7 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
 
 
 
-    };
+    }
 
     //View material Date Picker
     protected  void openMaterialDatePicker(View view){
@@ -211,7 +221,7 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
             }
         });
 
-    };
+    }
 
     //Compare Dates
     protected boolean compareDate(String dateFromString, String dateToString) {
@@ -224,9 +234,9 @@ public class UpdateBudgetFormActivity extends AppCompatActivity {
             }
             else return false;
         }
-        catch (ParseException e){
-            Log.i("Execption", String.valueOf(e));
+        catch (ParseException | NullPointerException e){
+            Log.i("Exception", String.valueOf(e));
             return false;
         }
-    };
+    }
 }

@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BudgetFormActivity extends AppCompatActivity {
     //DB Reference
@@ -88,6 +90,15 @@ public class BudgetFormActivity extends AppCompatActivity {
                             @Override
                             public void DataIsInserted() {
                                 Snackbar.make(view, "Budget successfully added", Snackbar.LENGTH_SHORT).show();
+                                Timer timer = new Timer();
+
+                                timer.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        BudgetFormActivity.this.finish();
+                                    }
+                                }, 1000);
+
                             }
 
                             @Override
@@ -147,14 +158,13 @@ public class BudgetFormActivity extends AppCompatActivity {
             Date dateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromString);
             @SuppressLint("SimpleDateFormat") Date dateTo = new SimpleDateFormat("dd/MM/yyyy").parse(dateToString);
 
-            if(dateTo!=null&&dateFrom!=null&&dateTo.compareTo(dateFrom)>0){
+            if(dateTo!=null&&dateFrom!=null&&dateTo.compareTo(dateFrom)>0)
                 return true;
-            }
             else return false;
         }
         catch (ParseException e){
             Log.i("Execption", String.valueOf(e));
             return false;
         }
-    };
+    }
 }

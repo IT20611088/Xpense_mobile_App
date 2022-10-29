@@ -37,16 +37,12 @@ public class Navigation_drawer extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityNavigationDrawer2Binding binding;
 
-    TextView tvFirstName, tvEmail;
+    private TextView tvFirstName, tvEmail;
+    private  String firstName, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        tvFirstName = findViewById(R.id.textView17);
-        tvEmail = findViewById(R.id.tvEmail);
-
-
 
         binding = ActivityNavigationDrawer2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -72,20 +68,6 @@ public class Navigation_drawer extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Initialize Firebase Auth
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -97,24 +79,23 @@ public class Navigation_drawer extends AppCompatActivity {
         }
 
 
-
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                if (tvFirstName != null) {
-                    tvFirstName.setText(user.name);
-                    tvEmail.setText(user.email);
-//                    tvFirstName.setText("test");
-//                 tvEmail.setText("test");
 
-                    Log.d("test", user.name);
+                if(user !=null){
+                    firstName =user.name;
+                    email =user.email;
                 }
-                else{
-                    Log.i("afknkafkhsgkh", user.name);
+
+                tvFirstName = findViewById(R.id.tvFirstName);
+                tvEmail = findViewById(R.id.tvEmail);
+                if(tvFirstName != null && tvEmail != null){
+                    tvFirstName.setText(firstName);
+                    tvEmail.setText(email);
                 }
             }
 
@@ -134,8 +115,6 @@ public class Navigation_drawer extends AppCompatActivity {
                 logoutUser();
             }
         });
-
-
     }
 
     @Override
