@@ -29,6 +29,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public RecyclerViewAdapter(ArrayList<String> expenseNo, ArrayList<String> expenseDate,
                                ArrayList<String> expenseID, Context mContext) {
+
         this.expenseNo = expenseNo;
         this.expenseDate = expenseDate;
         this.expenseID = expenseID;
@@ -88,8 +89,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     Intent intent = new Intent(mContext, ExpenseOverviewActivity.class);
                     intent.putExtra("id", db_id.getText().toString());
                     intent.putExtra("expenseNo", expenseNo.getText().toString());
-//                    intent.putExtra("amount", )
-
 
                     mContext.startActivity(intent);
                 }
