@@ -12,7 +12,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DatabaseHelper {
 
@@ -21,14 +24,7 @@ public class DatabaseHelper {
     private ArrayList<String> keys = new ArrayList<>();
     private ArrayList<String> budgetNo = new ArrayList<>();
 
-    public interface BudgetDataStatus{
-        void DataIsLoaded(ArrayList<Budget> budgetArrayList,  ArrayList<String> keys, ArrayList<String> budgetNo);
-        void DataIsInserted();
-        void DataIsUpdated();
-        void DataIsDeleted();
-    }
-
-    public DatabaseHelper(){
+    public DatabaseHelper() {
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("user_budgets");
     }
@@ -44,9 +40,12 @@ public class DatabaseHelper {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     budgetArrayList.clear();
+                    budgetNo.clear();
+                    keys.clear();
+
                     int count = 0;
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                            //Assign retrieved values to a budget object
+                        //Assign retrieved values to a budget object
 
                         Budget budget = new Budget();
                         budget.setDate_from(ds.child("date_from").getValue().toString());
@@ -59,7 +58,7 @@ public class DatabaseHelper {
                         keys.add(String.valueOf(ds.getKey()));
                     }
 
-                   budgetDataStatus.DataIsLoaded(budgetArrayList, keys, budgetNo);
+                    budgetDataStatus.DataIsLoaded(budgetArrayList, keys, budgetNo);
 
                 } else {
                     budgetArrayList.clear();
@@ -73,38 +72,84 @@ public class DatabaseHelper {
 
             }
         });
-    };
+    }
 
     //Add new budget record to database
-    public void addBudget(Budget budget, final BudgetDataStatus dataStatus){
+    public void addBudget(Budget budget, final BudgetDataStatus dataStatus) {
         //User Id
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-        String key = dbRef.child(userId).push().getKey();
-        dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dbRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onSuccess(Void unused) {
-                dataStatus.DataIsInserted();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    Log.i("No children-------------------------------------------------------", "false");
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        try {
+                            Date tempDateFrom = formatter.parse(ds.child("date_from").getValue().toString());
+                            Date tempDateTo = formatter.parse(ds.child("date_to").getValue().toString());
+                            Date dateFrom = formatter.parse(budget.getDate_from());
+                            Date dateTo = formatter.parse(budget.getDate_to());
+
+                            //Budget that user is trying to adding is within given range
+                            //budget is outside of already available budgets
+                            if(dateValidator(tempDateFrom, tempDateTo, dateFrom, dateTo)){
+                                //Get current user id
+                                String key = dbRef.child(userId).push().getKey();
+                                dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        dataStatus.DataIsInserted();
+                                    }
+                                });
+                                break;
+                            }
+                            else{
+                                dataStatus.DisplayAlerts();
+                            }
+
+                        } catch (ParseException e) {
+                            Log.e("__________________________________________________________________EXCEPTION", String.valueOf(e));
+                        }
+                    }
+
+                } else {
+                    // if this is the first budget
+                    String key = dbRef.child(userId).push().getKey();
+                    dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            dataStatus.DataIsInserted();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
-    };
+    }
 
     //Update a budget record
-    public void updateBudget(Budget budget, String key, final BudgetDataStatus budgetDataStatus){
+    public void updateBudget(Double amount, String key, final BudgetDataStatus budgetDataStatus) {
         //User ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dbRef.child(userId).child(key).child("amount").setValue(amount).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 budgetDataStatus.DataIsUpdated();
             }
         });
-    };
+    }
 
     //Delete a budget record
-    public void  deleteBudget(String key, BudgetDataStatus budgetDataStatus){
+    public void deleteBudget(String key, BudgetDataStatus budgetDataStatus) {
         //User ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -114,5 +159,22 @@ public class DatabaseHelper {
                 budgetDataStatus.DataIsDeleted();
             }
         });
+    }
+
+    public interface BudgetDataStatus {
+        void DataIsLoaded(ArrayList<Budget> budgetArrayList, ArrayList<String> keys, ArrayList<String> budgetNo);
+
+        void DataIsInserted();
+
+        void DataIsUpdated();
+
+        void DataIsDeleted();
+
+        void DisplayAlerts();
+    }
+
+    //Date validator
+    protected boolean dateValidator(Date tempDateFrom, Date tempDateTo, Date dateFrom, Date dateTo){
+        return dateFrom.equals(tempDateTo) || dateTo.equals(tempDateFrom) || dateTo.before(tempDateFrom) || dateFrom.after(tempDateTo);
     }
 }

@@ -65,9 +65,14 @@ public class BudgetReportActivity extends AppCompatActivity {
             public void DataIsDeleted() {
 
             }
+
+            @Override
+            public void DisplayAlerts() {
+
+            }
         });
 
-    };
+    }
 
     //Direct to add budget
     protected void addBudget(View view) {

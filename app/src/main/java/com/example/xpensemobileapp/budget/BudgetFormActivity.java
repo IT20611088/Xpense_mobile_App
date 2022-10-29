@@ -1,7 +1,5 @@
 package com.example.xpensemobileapp.budget;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.xpensemobileapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -56,21 +55,20 @@ public class BudgetFormActivity extends AppCompatActivity {
         budgetDateTo.setOnClickListener(this::openMaterialDatePicker);
 
 
-
         //Add a new budget
-        btnAddBudget.setOnClickListener(new View.OnClickListener(){
+        btnAddBudget.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(budgetDateFrom.getText().toString()))
+                if (TextUtils.isEmpty(budgetDateFrom.getText().toString()))
                     Snackbar.make(view, "Please Enter a date", Snackbar.LENGTH_SHORT).show();
-                else if(TextUtils.isEmpty(budgetDateTo.getText().toString()))
+                else if (TextUtils.isEmpty(budgetDateTo.getText().toString()))
                     Snackbar.make(view, "Please Enter a date", Snackbar.LENGTH_SHORT).show();
-                else if(TextUtils.isEmpty(budgetAmount.getText().toString()))
+                else if (TextUtils.isEmpty(budgetAmount.getText().toString()))
                     Snackbar.make(view, "Please Enter a amount", Snackbar.LENGTH_SHORT).show();
-                else{
+                else {
 
-                    if(compareDate(budgetDateFrom.getText().toString(), budgetDateTo.getText().toString())) {
+                    if (compareDate(budgetDateFrom.getText().toString(), budgetDateTo.getText().toString())) {
                         //Get user inputs
                         budget.setDate_from(budgetDateFrom.getText().toString());
                         budget.setDate_to(budgetDateTo.getText().toString());
@@ -106,9 +104,13 @@ public class BudgetFormActivity extends AppCompatActivity {
                             public void DataIsDeleted() {
 
                             }
+
+                            @Override
+                            public void DisplayAlerts() {
+                                Snackbar.make(view, "You have already added a budget in entered time range please try again.", Snackbar.LENGTH_SHORT).show();
+                            }
                         });
-                    }
-                    else {
+                    } else {
                         Snackbar.make(view, "Please check entered date values", Snackbar.LENGTH_SHORT).show();
                     }
                 }
@@ -116,7 +118,7 @@ public class BudgetFormActivity extends AppCompatActivity {
         });
     }
 
-    protected  void openMaterialDatePicker(View view){
+    protected void openMaterialDatePicker(View view) {
 
         //Instantiate Material Date Picker
         MaterialDatePicker.Builder<Long> materialDatePickerBuilder = MaterialDatePicker.Builder.datePicker();
@@ -137,10 +139,9 @@ public class BudgetFormActivity extends AppCompatActivity {
                 calendar.setTimeInMillis(selection);
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 String date = format.format(calendar.getTime());
-                if(view.getId()==R.id.editTextDateFrom){
+                if (view.getId() == R.id.editTextDateFrom) {
                     budgetDateFrom.setText(date);
-                }
-                else if(view.getId()==R.id.editTextDateTo){
+                } else if (view.getId() == R.id.editTextDateTo) {
                     budgetDateTo.setText(date);
                 }
             }
@@ -154,11 +155,10 @@ public class BudgetFormActivity extends AppCompatActivity {
             Date dateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromString);
             @SuppressLint("SimpleDateFormat") Date dateTo = new SimpleDateFormat("dd/MM/yyyy").parse(dateToString);
 
-            if(dateTo!=null&&dateFrom!=null&&dateTo.compareTo(dateFrom)>0)
+            if (dateTo != null && dateFrom != null && dateTo.compareTo(dateFrom) > 0)
                 return true;
             else return false;
-        }
-        catch (ParseException e){
+        } catch (ParseException e) {
             Log.i("Execption", String.valueOf(e));
             return false;
         }
