@@ -1,9 +1,13 @@
 package com.example.xpensemobileapp.expense;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
+import com.example.xpensemobileapp.budget.Budget;
+import com.example.xpensemobileapp.budget.DatabaseHelper;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -134,6 +147,8 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
     }
 
     public void addExpense(View view) throws ParseException {
+
+
         //get the values of the input fields
         String amountTxt = this.amount.getText().toString();
         String currencyTxt = this.currencyType.getSelectedItem().toString();
@@ -146,7 +161,7 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dateCurrent = new Date();
 
-        Date date=formatter.parse(dateTxt);
+
 
 
         // checking whether any of the above fields are empty
@@ -157,11 +172,6 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         else if(dateTxt.matches("")){
             Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
         }
-
-        else if(date.after(dateCurrent)){
-            Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
-        }
-
         else if(payeeTxt.matches("")){
             Snackbar.make(view, "Please input a value for payee", Snackbar.LENGTH_SHORT).show();
         }
@@ -171,31 +181,192 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         }
 
         else{
-            //create new object of ExpenseForm class
-            ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
-            categoryTxt, descriptionTxt);
 
-            new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
-                @Override
-                public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+            Date date=formatter.parse(dateTxt);
+            //Check if the entered date is a future date
+            if(date.after(dateCurrent))
+                Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
 
-                }
+            else{
 
-                @Override
-                public void DataIsInserted() {
-                    Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
-                }
+                //fetching details of the budget for the user if exists
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("user_budgets");
+                dbRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //Log.i("----------------------------------------", String.valueOf(snapshot.hasChildren()));
+                        boolean foundBudget = false;
+                        Date dateFrom = null;
+                        Date dateTo = null;
+                        double budgetAmount = 0;
+                        String budgetKey = "";
+                        double enteredAmount = Double.parseDouble(amount.getText().toString());
 
-                @Override
-                public void DataIsUpdated() {
+                        if (snapshot.hasChildren()){
+                            for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+                                try {
+                                     dateFrom = formatter.parse(childSnapshot.child("date_from").getValue().toString());
+                                     dateTo = formatter.parse(childSnapshot.child("date_to").getValue().toString());
+                                } catch(ParseException e){
+                                    //Log.i("Parse Exception===", e.toString());
+                                }
 
-                }
+                                if( (date.compareTo(dateFrom)==0  || date.after(dateFrom) ) && ( date.compareTo(dateTo)==0 || date.before(dateTo) ) ) {
+                                    foundBudget = true;
+                                    budgetKey = childSnapshot.getKey();
+                                    budgetAmount = Double.parseDouble(childSnapshot.child("amount").getValue().toString());
+                                    dbRef.removeEventListener(this);//break;
+                                }
 
-                @Override
-                public void DataIsDeleted() {
+                                else
+                                    continue;
+                            }
 
-                }
-            });
+                            Log.i("found Budget", String.valueOf(foundBudget));
+                            if(foundBudget == true){
+                                if(enteredAmount > budgetAmount){
+                                    double finalBudgetAmount = budgetAmount;
+                                    String finalBudgetKey = budgetKey;
+                                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if(which == DialogInterface.BUTTON_POSITIVE){
+                                                ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                                new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
+                                                    @Override
+                                                    public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void DataIsInserted() {
+                                                        Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+                                                    }
+
+                                                    @Override
+                                                    public void DataIsUpdated() {
+
+                                                    }
+
+                                                    @Override
+                                                    public void DataIsDeleted() {
+
+                                                    }
+                                                });
+
+                                                dbRef.child(userId).child(finalBudgetKey).child("amount").setValue(finalBudgetAmount -enteredAmount);
+                                            }
+
+                                        }
+                                    };
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseFormActivity.this);
+
+                                        builder.setMessage("Are you sure you want to exceed you budget of LKR " +
+                                                        budgetAmount + " between " +
+                                                        formatter.format(dateFrom) + " and " + formatter.format(dateTo) + "?").setPositiveButton("Yes", dialogClickListener)
+                                                .setNegativeButton("No", dialogClickListener).show();
+                                }
+
+                                else{
+                                    //update budget and add expense for entered amounts less than budget amount value
+                                    double finalBudgetAmount = budgetAmount;
+                                    String finalBudgetKey = budgetKey;
+
+                                    ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                    new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
+                                        @Override
+                                        public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                        }
+
+                                        @Override
+                                        public void DataIsInserted() {
+                                            Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void DataIsUpdated() {
+
+                                        }
+
+                                        @Override
+                                        public void DataIsDeleted() {
+
+                                        }
+                                    });
+
+                                    dbRef.child(userId).child(finalBudgetKey).child("amount").setValue(finalBudgetAmount -enteredAmount);
+                                }
+                            }
+
+                            else{
+                                ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
+                                    @Override
+                                    public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsInserted() {
+                                        Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void DataIsUpdated() {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsDeleted() {
+
+                                    }
+                                });
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+//                //create new object of ExpenseForm class
+//                ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
+//                        categoryTxt, descriptionTxt);
+//
+//                new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
+//                    @Override
+//                    public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+//
+//                    }
+//
+//                    @Override
+//                    public void DataIsInserted() {
+//                        Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void DataIsUpdated() {
+//
+//                    }
+//
+//                    @Override
+//                    public void DataIsDeleted() {
+//
+//                    }
+//                });
+            }
+
         }
 
     }

@@ -79,6 +79,8 @@ public class Navigation_drawer extends AppCompatActivity {
         }
 
 
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
