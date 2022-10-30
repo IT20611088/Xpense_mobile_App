@@ -9,26 +9,12 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/heading"
-        style="@style/headingStyling"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/headingName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/amountLabel"
         style="@style/labelStyling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="50dp"
         android:text="@string/amount"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +139,7 @@
     <Spinner
         android:id="@+id/methodValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
 
@@ -169,7 +155,7 @@
     <Spinner
         android:id="@+id/currencyValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="24dp"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="17dp"
@@ -199,7 +185,7 @@
     <Spinner
         android:id="@+id/categoryValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="17dp"
@@ -231,19 +217,20 @@
         android:layout_height="35dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="34dp"
+        android:background="@drawable/button_tap_selector"
         android:onClick="next"
         android:paddingLeft="0dp"
+
         android:paddingTop="0dp"
 
         android:paddingRight="0dp"
-
         android:paddingBottom="0dp"
         android:scaleType="fitCenter"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/green_plus_icon"
 
-        android:background="@drawable/button_tap_selector"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/green_plus_icon" />
 
     <LinearLayout
         android:layout_width="250dp"

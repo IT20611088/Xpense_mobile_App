@@ -62,6 +62,8 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_overview);
 
+        setTitle("Expense Overview");
+
 
         this.expenseID = getIntent().getExtras().getString("id");
         this.expenseNo = getIntent().getExtras().getString("expenseNo");
@@ -71,7 +73,7 @@ public class ExpenseOverviewActivity extends AppCompatActivity {
         this.amount = findViewById(R.id.overviewAmountLabelValue);
         this.amount.setEnabled(false);
 
-        this.overviewTitle.setText("Expense Overview - " + this.expenseNo);
+        this.overviewTitle.setText(this.expenseNo);
 
         this.category = findViewById(R.id.overviewCategoryLabelValue);
         this.payee = findViewById(R.id.overviewPayeeLabelValue);

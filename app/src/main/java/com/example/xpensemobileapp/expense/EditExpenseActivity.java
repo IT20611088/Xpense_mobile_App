@@ -1,9 +1,12 @@
 package com.example.xpensemobileapp.expense;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,8 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,10 +53,14 @@ public class EditExpenseActivity extends AppCompatActivity {
     private EditText payee;
     private EditText description;
 
+    private double previousAmount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_expense);
+
+        setTitle("Edit Expense");
 
         this.expenseID = getIntent().getExtras().getString("id");
 
@@ -59,10 +68,6 @@ public class EditExpenseActivity extends AppCompatActivity {
         this.payee = findViewById(R.id.editPayeeValue);
         this.description = findViewById(R.id.editDescriptionValue);
 
-        //if()
-        //Log.i("intentVal", getIntent().getExtras().getString("id"));
-
-        //TextView amountLbl = findViewById(R.id.amountLabel);
 
         this.paymentMethod = findViewById(R.id.editMethodValue);
         //create an ArrayAdapter using the string array and a default spinner layout
@@ -149,11 +154,10 @@ public class EditExpenseActivity extends AppCompatActivity {
                     if(expenseID.equals(childSnapshot.getKey())){
                         amount.setText(expense.getAmount());
                         payee.setText(expense.getPayee());
-                        //method.setText(expense.getMethod());
                         date.setText(expense.getDate());
-                        //currency.setText(expense.getCurrency());
-                        //category.setText(expense.getCategory());
                         description.setText(expense.getDescription());
+
+                        previousAmount = Double.parseDouble(expense.getAmount());
                     }
 
                 }
@@ -174,7 +178,10 @@ public class EditExpenseActivity extends AppCompatActivity {
         this.date.setText(dateFormat.format(myCalendar.getTime()));
     }
 
-    public void onClickSaveBtn(View view){
+    public void onClickSaveBtn(View view) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateCurrent = new Date();
+
         //get the values of the input fields
         String amountTxt = this.amount.getText().toString();
         String currencyTxt = this.currencyType.getSelectedItem().toString();
@@ -185,7 +192,6 @@ public class EditExpenseActivity extends AppCompatActivity {
         String descriptionTxt = description.getText().toString();
 
         // checking whether any of the above fields are empty
-
         if(amountTxt.matches("")){
             Snackbar.make(view, "Please input a value for amount", Snackbar.LENGTH_SHORT).show();
         }
@@ -203,30 +209,210 @@ public class EditExpenseActivity extends AppCompatActivity {
         }
 
         else{
-            ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
-                    categoryTxt, descriptionTxt);
+            Date date=formatter.parse(dateTxt);
+            //Check if the entered date is a future date
+            if(date.after(dateCurrent))
+                Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
 
-            new FirebaseDatabaseHelper().updateExpense(this.expenseID, expense, new FirebaseDatabaseHelper.DataStatus() {
-                @Override
-                public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+            else{
+                //fetching details of the budget for the user if any particular budget exists
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("user_budgets");
+                dbRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                }
+                        boolean foundBudget = false;
+                        Date dateFrom = null;
+                        Date dateTo = null;
+                        double budgetAmount = 0;
+                        String budgetKey = "";
+                        double enteredAmount = Double.parseDouble(amount.getText().toString());
 
-                @Override
-                public void DataIsInserted() {
 
-                }
+                        if (snapshot.hasChildren()){
+                            for (DataSnapshot childSnapshot: snapshot.getChildren()) {
+                                try {
+                                    dateFrom = formatter.parse(childSnapshot.child("date_from").getValue().toString());
+                                    dateTo = formatter.parse(childSnapshot.child("date_to").getValue().toString());
+                                } catch(ParseException e){
 
-                @Override
-                public void DataIsUpdated() {
-                    Snackbar.make(view, "Expense updated successfully", Snackbar.LENGTH_SHORT).show();
-                }
+                                }
 
-                @Override
-                public void DataIsDeleted() {
+                                //check whether there is any budget for the entered date
+                                if( (date.compareTo(dateFrom)==0  || date.after(dateFrom) ) && ( date.compareTo(dateTo)==0 || date.before(dateTo) ) ) {
+                                    foundBudget = true;
+                                    budgetKey = childSnapshot.getKey();
+                                    budgetAmount = Double.parseDouble(childSnapshot.child("amount").getValue().toString());
+                                    dbRef.removeEventListener(this);
+                                }
 
-                }
-            });
+                                else
+                                    continue;
+                            }
+
+                            Log.i("found Budget", String.valueOf(foundBudget));
+
+
+                            //if a budget is found for the entered date
+                            if(foundBudget == true){
+
+                                //check if new amount entered is greater than previous amount and budget value is exceeded
+                                //update budget value accordingly
+                                if(enteredAmount > previousAmount && ( (budgetAmount-(enteredAmount-previousAmount))  < 0 )){
+
+                                    String finalBudgetKey = budgetKey;
+                                    double finalBudgetAmount = budgetAmount;
+                                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if(which == DialogInterface.BUTTON_POSITIVE){
+                                                ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                                new FirebaseDatabaseHelper().updateExpense(expenseID, expense, new FirebaseDatabaseHelper.DataStatus() {
+                                                    @Override
+                                                    public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void DataIsInserted() {
+
+                                                    }
+
+                                                    @Override
+                                                    public void DataIsUpdated() {
+                                                        Snackbar.make(view, "Expense updated successfully", Snackbar.LENGTH_SHORT).show();
+                                                    }
+
+                                                    @Override
+                                                    public void DataIsDeleted() {
+
+                                                    }
+                                                });
+
+                                                dbRef.child(userId).child(finalBudgetKey).child("amount").setValue(finalBudgetAmount -(enteredAmount-previousAmount));
+                                            }
+
+                                        }
+                                    };
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(EditExpenseActivity.this);
+
+                                    builder.setMessage("Are you sure you want to exceed you budget of LKR " +
+                                                    budgetAmount + " between " +
+                                                    formatter.format(dateFrom) + " and " + formatter.format(dateTo) + "?").setPositiveButton("Yes", dialogClickListener)
+                                            .setNegativeButton("No", dialogClickListener).show();
+                                }
+
+                                //check if new amount entered is greater than previous amount and budget value is not exceeded
+                                //update budget value accordingly
+                                else if(enteredAmount > previousAmount && ( (budgetAmount-(enteredAmount-previousAmount))  >= 0 )){
+
+                                    ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                    new FirebaseDatabaseHelper().updateExpense(expenseID, expense, new FirebaseDatabaseHelper.DataStatus() {
+                                        @Override
+                                        public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                        }
+
+                                        @Override
+                                        public void DataIsInserted() {
+
+                                        }
+
+                                        @Override
+                                        public void DataIsUpdated() {
+                                            Snackbar.make(view, "Expense updated successfully", Snackbar.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void DataIsDeleted() {
+
+                                        }
+                                    });
+
+                                    dbRef.child(userId).child(budgetKey).child("amount").setValue(budgetAmount -(enteredAmount-previousAmount));
+                                }
+
+                                //check if new amount entered is less than previous amount
+                                //update budget value accordingly
+                                else if(enteredAmount < previousAmount){
+
+                                    ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                    new FirebaseDatabaseHelper().updateExpense(expenseID, expense, new FirebaseDatabaseHelper.DataStatus() {
+                                        @Override
+                                        public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                        }
+
+                                        @Override
+                                        public void DataIsInserted() {
+
+                                        }
+
+                                        @Override
+                                        public void DataIsUpdated() {
+                                            Snackbar.make(view, "Expense updated successfully", Snackbar.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void DataIsDeleted() {
+
+                                        }
+                                    });
+
+                                    dbRef.child(userId).child(budgetKey).child("amount").setValue(budgetAmount +(previousAmount-enteredAmount));
+                                }
+
+
+
+                            }
+
+                            //only update the particular expense details if no budget is found for the entered date
+                            else{
+                                ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt, categoryTxt, descriptionTxt);
+
+                                new FirebaseDatabaseHelper().updateExpense(expenseID, expense, new FirebaseDatabaseHelper.DataStatus() {
+                                    @Override
+                                    public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsInserted() {
+
+                                    }
+
+                                    @Override
+                                    public void DataIsUpdated() {
+                                        Snackbar.make(view, "Expense updated successfully", Snackbar.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void DataIsDeleted() {
+
+                                    }
+                                });
+                            }
+
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+
+
         }
     }
 

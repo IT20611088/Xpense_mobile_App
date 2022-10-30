@@ -8,24 +8,12 @@
 
 
     <TextView
-        android:id="@+id/editExpenseTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/editExpenseTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        style="@style/expenseOverviewTitle"/>
-
-    <TextView
         android:id="@+id/editAmountLabel"
         style="@style/labelStyling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:text="@string/amount"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +140,7 @@
     <Spinner
         android:id="@+id/editMethodValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
 
@@ -168,7 +156,7 @@
     <Spinner
         android:id="@+id/editCurrencyValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="24dp"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="17dp"
@@ -198,7 +186,7 @@
     <Spinner
         android:id="@+id/editCategoryValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="17dp"
@@ -254,7 +242,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/uploadImageText"
         app:layout_constraintBottom_toTopOf="@+id/expenseSaveButton"
 
