@@ -43,8 +43,7 @@ public class Navigation_drawer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tvFirstName = findViewById(R.id.textView17);
-        tvEmail = findViewById(R.id.tvEmail);
+
 
 
 
@@ -52,13 +51,13 @@ public class Navigation_drawer extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarNavigationDrawer.toolbar);
-        binding.appBarNavigationDrawer.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        binding.appBarNavigationDrawer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -103,11 +102,13 @@ public class Navigation_drawer extends AppCompatActivity {
         DatabaseReference reference = database.getReference("users").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot ) {
                 User user = snapshot.getValue(User.class);
+                tvFirstName = findViewById(R.id.tvFirstName);
+                tvEmail = findViewById(R.id.tvEmail);
                 if (user != null) {
-//                    tvFirstName.setText(user.name);
-//                    tvEmail.setText(user.email);
+                    tvFirstName.setText(user.name);
+                    tvEmail.setText(user.email);
 //                    tvFirstName.setText("test");
 //                 tvEmail.setText("test");
 

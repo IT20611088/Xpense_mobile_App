@@ -170,6 +170,12 @@
         <item name="android:textColor">@color/my_red</item>
     </style>
 
+    <style name="incomeOverviewTitle">
+        <item name="android:fontFamily">@font/roboto_med</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/purple_500</item>
+    </style>
+
     <style name="expenseOverviewLabels">
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">16sp</item>

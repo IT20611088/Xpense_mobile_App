@@ -51,14 +51,15 @@
     <string name="today_expense">Today expense</string>
 
     <string name="income">Income</string>
+    <string name="editIncomeTitle">editIncomeTitle</string>
     <string name="expense">Expense</string>
 
     <string name="valueszero">0.00</string>
-    <string name="valuetotal">$130.00</string>
-    <string name="totalprice">Total Balance</string>
+    <string name="valuetotal">$00.00</string>
+    <string name="totalprice">Total Balance ( LKR )</string>
 
-    <string name="dashboard_income">$150.00</string>
-    <string name="dashboard_expense">$30.00</string>
+    <string name="dashboard_income">$0.00</string>
+    <string name="dashboard_expense">$0.00</string>
 
     <string name="incomeOverviewTitle">Income Overview</string>
     <string name="menu_gallery">Gallery</string>
@@ -67,6 +68,7 @@
     <string name="headingName">EXPENSE</string>
     <string name="amount">Amount</string>
     <string name="payee">Payee</string>
+    <string name="payer">payer</string>
     <string name="method">Method</string>
     <string name="date">Date</string>
     <string name="currency">Currency</string>
@@ -76,6 +78,7 @@
     <!--hints for the input fields-->
     <string name="amountHint">Ex- 2000.00</string>
     <string name="payeeHint">Ex- Bank</string>
+    <string name="payerHint">Ex- salary</string>
     <string name="descriptionHint">Ex- Made a bank transfer today</string>
 
 
@@ -217,8 +220,6 @@
     <!--EditExpenseActivity strings-->
     <string name="editExpenseTitle">Edit Expense</string>
     <string name="expenseSaveBtn">SAVE</string>
-
-
 
 
 </resources>

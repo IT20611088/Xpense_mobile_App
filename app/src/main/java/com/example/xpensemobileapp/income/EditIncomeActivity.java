@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,9 +14,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
-import com.example.xpensemobileapp.expense.EditExpenseActivity;
-import com.example.xpensemobileapp.expense.ExpenseForm;
-import com.example.xpensemobileapp.expense.FirebaseDatabaseHelper;
+import com.example.xpensemobileapp.income.EditIncomeActivity;
+import com.example.xpensemobileapp.income.IncomeForm;
+import com.example.xpensemobileapp.income.FirebaseDatabaseHelper;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +32,7 @@ import java.util.Locale;
 
 public class EditIncomeActivity extends AppCompatActivity {
 
-    private String expenseID;
+    private String incomeID;
     private DatabaseReference dbRef;
 
     private final Calendar myCalendar= Calendar.getInstance();
@@ -54,7 +57,9 @@ public class EditIncomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_income);
 
-        this.expenseID = getIntent().getExtras().getString("id");
+        setTitle("Edit Income");
+
+        this.incomeID = getIntent().getExtras().getString("id");
 
         this.amount = findViewById(R.id.editAmountValue);
         this.payee = findViewById(R.id.editPayeeValue);
@@ -65,16 +70,16 @@ public class EditIncomeActivity extends AppCompatActivity {
 
         //TextView amountLbl = findViewById(R.id.amountLabel);
 
-        this.paymentMethod = findViewById(R.id.editMethodValue);
+        //this.paymentMethod = findViewById(R.id.editMethodValue);
         //create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(this,
-                R.array.paymentTypes, R.layout.spinner_item);
+        //ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(this,
+                //R.array.paymentTypes, R.layout.spinner_item);
 
         //specify the layout to use when the list of choices appears
-        paymentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_list);
+       // paymentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_list);
 
         //apply the adapter to the spinner
-        this.paymentMethod.setAdapter(paymentAdapter);
+        //this.paymentMethod.setAdapter(paymentAdapter);
 
 
         /*********************************************************************************************/
@@ -92,16 +97,16 @@ public class EditIncomeActivity extends AppCompatActivity {
 
         /*********************************************************************************************/
 
-        this.categoryType = findViewById(R.id.editCategoryValue);
+        //this.categoryType = findViewById(R.id.editCategoryValue);
         //create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.categoryTypes, R.layout.spinner_item);
+        //ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
+               // R.array.categoryTypes, R.layout.spinner_item);
 
         //specify the layout to use when the list of choices appears
-        categoryAdapter.setDropDownViewResource(R.layout.spinner_dropdown_list);
+        //categoryAdapter.setDropDownViewResource(R.layout.spinner_dropdown_list);
 
         //apply the adapter to the spinner
-        this.categoryType.setAdapter(categoryAdapter);
+       // this.categoryType.setAdapter(categoryAdapter);
 
         /*********************************************************************************************/
 
@@ -123,7 +128,7 @@ public class EditIncomeActivity extends AppCompatActivity {
         this.date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(EditExpenseActivity.this, date,
+                new DatePickerDialog(EditIncomeActivity.this, date,
                         myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -131,28 +136,30 @@ public class EditIncomeActivity extends AppCompatActivity {
 
 
 
-        getExpenseData();
+        getIncomeData();
     }
 
 
-    private void getExpenseData(){
-        this.dbRef = FirebaseDatabase.getInstance().getReference("expenses");
+    private void getIncomeData(){
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        this.dbRef = FirebaseDatabase.getInstance().getReference("user_incomes").child(userId);
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for (DataSnapshot childSnapshot: snapshot.getChildren()) {
-                    ExpenseForm expense = childSnapshot.getValue(ExpenseForm.class);
 
-                    if(expenseID.equals(childSnapshot.getKey())){
-                        amount.setText(expense.getAmount());
-                        payee.setText(expense.getPayee());
-                        //method.setText(expense.getMethod());
-                        date.setText(expense.getDate());
-                        //currency.setText(expense.getCurrency());
-                        //category.setText(expense.getCategory());
-                        description.setText(expense.getDescription());
+                    IncomeForm income = childSnapshot.getValue(IncomeForm.class);
+
+                    if(incomeID.equals(childSnapshot.getKey())){
+                        amount.setText(income.getAmount());
+                        payee.setText(income.getPayee());
+                        //method.setText(income.getMethod());
+                        date.setText(income.getDate());
+                        //currency.setText(income.getCurrency());
+                        //category.setText(income.getCategory());
+                        description.setText(income.getDescription());
                     }
 
                 }
@@ -177,26 +184,36 @@ public class EditIncomeActivity extends AppCompatActivity {
         //get the values of the input fields
         String amountTxt = this.amount.getText().toString();
         String currencyTxt = this.currencyType.getSelectedItem().toString();
-        String methodTxt = this.paymentMethod.getSelectedItem().toString();
+
         String dateTxt = this.date.getText().toString();
         String payeeTxt = this.payee.getText().toString();
-        String categoryTxt = this.categoryType.getSelectedItem().toString();
+
         String descriptionTxt = description.getText().toString();
 
         // checking whether any of the above fields are empty
-        if(amountTxt.matches("") || dateTxt.matches("") || payeeTxt.matches("") || descriptionTxt.matches("")){
-            String infomsg = "Please fill all the empty fields";
 
-            Toast.makeText(this, infomsg, Toast.LENGTH_SHORT).show();
+        if(amountTxt.matches("")){
+            Snackbar.make(view, "Please input a value for amount", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(dateTxt.matches("")){
+            Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(payeeTxt.matches("")){
+            Snackbar.make(view, "Please input a value for payee", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(descriptionTxt.matches("")){
+            Snackbar.make(view, "Please input a value for description", Snackbar.LENGTH_SHORT).show();
         }
 
         else{
-            ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
-                    categoryTxt, descriptionTxt);
+            IncomeForm income = new IncomeForm(amountTxt, currencyTxt, dateTxt, payeeTxt, descriptionTxt);
 
-            new com.example.xpensemobileapp.expense.FirebaseDatabaseHelper().updateExpense(this.expenseID, expense, new FirebaseDatabaseHelper.DataStatus() {
+            new FirebaseDatabaseHelper().updateIncome(this.incomeID, income, new FirebaseDatabaseHelper.DataStatus() {
                 @Override
-                public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+                public void DataIsLoaded(List<IncomeForm> incomes, List<String> keys) {
 
                 }
 
@@ -207,7 +224,13 @@ public class EditIncomeActivity extends AppCompatActivity {
 
                 @Override
                 public void DataIsUpdated() {
-                    Toast.makeText(getApplicationContext(), "Expense updated successfully", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(EditIncomeActivity.this, "Income updated successfully", Toast.LENGTH_SHORT).show();
+
+
+                    Intent intent = new Intent(getApplicationContext(), IncomeOverviewActivity.class);
+                    startActivity(intent);
+
                 }
 
                 @Override
