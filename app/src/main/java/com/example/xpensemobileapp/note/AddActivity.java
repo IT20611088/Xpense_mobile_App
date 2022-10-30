@@ -44,15 +44,15 @@ public class AddActivity extends AppCompatActivity {
         progressDialog.setTitle("saving");
         progressDialog.setMessage("saving your note");
         progressDialog.show();
-        String noteId= UUID.randomUUID().toString();
-        NotesModel notesModel = new NotesModel(noteId,title,description,firebaseAuth.getUid());
-        FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("notes").document(noteId).set(notesModel)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+        String noteId= UUID.randomUUID().toString();//generate aid for the new note and convert it to string
+        NotesModel notesModel = new NotesModel(noteId,title,description,firebaseAuth.getUid());//create a new instance of the notes model
+        FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();//get firebase instance
+        firebaseFirestore.collection("notes").document(noteId).set(notesModel)//add to the collection in the database
+                .addOnSuccessListener(new OnSuccessListener<Void>() {//if successful display success toast
                     @Override
                     public void onSuccess(Void unused) {
 
-                        Toast.makeText(AddActivity.this, "note saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddActivity.this, "Note added successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.cancel();
                         finish();
                     }

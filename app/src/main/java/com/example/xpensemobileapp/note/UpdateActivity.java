@@ -34,19 +34,20 @@ public class UpdateActivity extends AppCompatActivity {
 
         binding.title.setText(title);
         binding.description.setText(description);
+        //delete when the delete button is clicked
         binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProgressDialog progressDialog=new ProgressDialog(view.getContext());
                 progressDialog.setTitle("deleting");
-                FirebaseFirestore.getInstance()
-                        .collection("notes")
+                FirebaseFirestore.getInstance()//get the instance from the database
+                        .collection("notes")//go to the collection
                         .document(id)
                         .delete();
                 finish();
             }
         });
-
+        //update the edited note when update button is clicked
         binding.updateNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +56,6 @@ public class UpdateActivity extends AppCompatActivity {
                 updateNote();
             }
         });
-
     }
     private void updateNote(){
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -64,13 +64,12 @@ public class UpdateActivity extends AppCompatActivity {
         progressDialog.setMessage("your note");
         progressDialog.show();
         NotesModel notesModel = new NotesModel(id,title,description,firebaseAuth.getUid());
-        FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("notes").document(id).set(notesModel)
+        FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();//get the instance
+        firebaseFirestore.collection("notes").document(id).set(notesModel)//save to the database
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
-                        Toast.makeText(UpdateActivity.this, "note saved", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateActivity.this, "Note updated successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.cancel();
                         finish();
                     }
@@ -83,5 +82,4 @@ public class UpdateActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

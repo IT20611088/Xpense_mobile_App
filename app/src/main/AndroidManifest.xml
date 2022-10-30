@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.XpenseMobileApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".income.IncomeDashboardActivity"
@@ -41,18 +42,6 @@
             android:name=".income.EditIncomeActivity"
             android:exported="false" />
         <activity
-            android:name=".income.IncomeOverviewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".expense.EditExpenseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".income.IncomeDashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".expense.ExpensesDashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".Navigation_drawer"
             android:exported="false"
             android:theme="@style/Theme.XpenseMobileApp.NoActionBar" />
@@ -60,10 +49,6 @@
         <activity
             android:name=".TtestingHome"
             android:exported="false" />
-        <activity
-            android:name=".expense.ExpenseOverviewActivity"
-            android:exported="false"
-            android:parentActivityName=".expense.ExpensesDashboardActivity" />
         <activity
             android:name=".SignUp_page"
             android:exported="false" />

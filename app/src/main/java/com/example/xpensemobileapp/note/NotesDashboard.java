@@ -23,7 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//notes dashboard that displays all the note entries
 public class NotesDashboard extends AppCompatActivity {
     ActivityNotesDashboardBinding binding;
     private NotesAdapter notesAdapter;
@@ -43,6 +43,7 @@ public class NotesDashboard extends AppCompatActivity {
         binding.notesRecycler.setAdapter(notesAdapter);
         binding.notesRecycler.setLayoutManager(new LinearLayoutManager(this));
 
+        //add button that takes the user to the add new notes interface when clicked
         binding.floatingAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,17 +51,16 @@ public class NotesDashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //searchbar
         binding.searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = editable.toString();
@@ -70,11 +70,10 @@ public class NotesDashboard extends AppCompatActivity {
                     notesAdapter.clear();
                     notesAdapter.filterList(notesModelListss);
                 }
-
             }
         });
-
     }
+    //filtering searched words
     private void filter(String text){
        List<NotesModel> adapterList= notesAdapter.getList();
         List<NotesModel> notesModelList = new ArrayList<>();
@@ -122,12 +121,13 @@ public class NotesDashboard extends AppCompatActivity {
 
         getData();
     }
+    //load data into the dashboard
     private void getData(){
-        FirebaseFirestore.getInstance()
-                .collection("notes")
-                .whereEqualTo("uid",FirebaseAuth.getInstance().getUid())
+        FirebaseFirestore.getInstance()//get the instance from firebase
+                .collection("notes")//refer to the collection
+                .whereEqualTo("uid",FirebaseAuth.getInstance().getUid())//match it to the logged in user's userID
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {//if successful display all the notes of the specific user
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         notesAdapter.clear();
