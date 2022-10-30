@@ -30,6 +30,8 @@ public class ExpensesDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses_dashboard);
 
+        setTitle("Expenses");
+
           initializeContent();
 
     }
@@ -44,16 +46,11 @@ public class ExpensesDashboardActivity extends AppCompatActivity {
                 ProgressBar progressBar = findViewById(R.id.progressBar);
                 progressBar.setVisibility(GONE);
 
-                for(int i = 0; i < expenses.size(); i++){
-                    if(i < 10)
-                        expenseNo.add("ex_0" + (i+1));
-
-                    else
-                        expenseNo.add("ex_" + (i+1));
-                }
 
                 for(ExpenseForm object : expenses){
                     expenseDate.add(object.getDate());
+
+                    expenseNo.add(object.getDescription());
                 }
 
                 for(String key : keys){

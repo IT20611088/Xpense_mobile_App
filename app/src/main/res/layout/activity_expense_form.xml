@@ -9,26 +9,12 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/heading"
-        style="@style/headingStyling"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/headingName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/amountLabel"
         style="@style/labelStyling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="50dp"
         android:text="@string/amount"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -231,19 +217,20 @@
         android:layout_height="35dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="34dp"
+        android:background="@drawable/button_tap_selector"
         android:onClick="next"
         android:paddingLeft="0dp"
+
         android:paddingTop="0dp"
 
         android:paddingRight="0dp"
-
         android:paddingBottom="0dp"
         android:scaleType="fitCenter"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/green_plus_icon"
 
-        android:background="@drawable/button_tap_selector"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/green_plus_icon" />
 
     <LinearLayout
         android:layout_width="250dp"
@@ -274,7 +261,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/uploadImageText"
         app:layout_constraintBottom_toTopOf="@+id/addButton"
 
@@ -286,7 +273,7 @@
         android:id="@+id/uploadImageBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="240dp"
         android:background="@drawable/button_tap_selector"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"

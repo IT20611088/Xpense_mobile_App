@@ -64,6 +64,8 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_form);
 
+        setTitle("Expense");
+
         this.amount = findViewById(R.id.amountValue);
         this.payee = findViewById(R.id.payeeValue);
         this.description = findViewById(R.id.descriptionValue);
@@ -148,7 +150,6 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
     public void addExpense(View view) throws ParseException {
 
-
         //get the values of the input fields
         String amountTxt = this.amount.getText().toString();
         String currencyTxt = this.currencyType.getSelectedItem().toString();
@@ -160,8 +161,6 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dateCurrent = new Date();
-
-
 
 
         // checking whether any of the above fields are empty
@@ -242,7 +241,10 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
                                                     @Override
                                                     public void DataIsInserted() {
-                                                        Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+                                                        Toast.makeText(getApplicationContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+
+                                                        Intent intent = new Intent(getApplicationContext(), ExpensesDashboardActivity.class);
+                                                        startActivity(intent);
                                                     }
 
                                                     @Override
@@ -285,7 +287,10 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
                                         @Override
                                         public void DataIsInserted() {
-                                            Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+
+                                            Intent intent = new Intent(getApplicationContext(), ExpensesDashboardActivity.class);
+                                            startActivity(intent);
                                         }
 
                                         @Override
@@ -314,7 +319,10 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
 
                                     @Override
                                     public void DataIsInserted() {
-                                        Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(getApplicationContext(), ExpensesDashboardActivity.class);
+                                        startActivity(intent);
                                     }
 
                                     @Override
@@ -339,32 +347,6 @@ public class ExpenseFormActivity<FragmentContainerView> extends AppCompatActivit
                 });
 
 
-
-//                //create new object of ExpenseForm class
-//                ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
-//                        categoryTxt, descriptionTxt);
-//
-//                new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
-//                    @Override
-//                    public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
-//
-//                    }
-//
-//                    @Override
-//                    public void DataIsInserted() {
-//                        Snackbar.make(view, "Expense added successfully", Snackbar.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void DataIsUpdated() {
-//
-//                    }
-//
-//                    @Override
-//                    public void DataIsDeleted() {
-//
-//                    }
-//                });
             }
 
         }
