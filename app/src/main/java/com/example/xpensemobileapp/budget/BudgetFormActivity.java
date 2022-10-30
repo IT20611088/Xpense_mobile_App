@@ -67,12 +67,13 @@ public class BudgetFormActivity extends AppCompatActivity {
                 else if (TextUtils.isEmpty(budgetAmount.getText().toString()))
                     Snackbar.make(view, "Please Enter a amount", Snackbar.LENGTH_SHORT).show();
                 else {
+                    //Get user inputs
+                    budget.setDate_from(budgetDateFrom.getText().toString());
+                    budget.setDate_to(budgetDateTo.getText().toString());
+                    budget.setAmount(Double.parseDouble(budgetAmount.getText().toString()));
 
-                    if (compareDate(budgetDateFrom.getText().toString(), budgetDateTo.getText().toString())) {
-                        //Get user inputs
-                        budget.setDate_from(budgetDateFrom.getText().toString());
-                        budget.setDate_to(budgetDateTo.getText().toString());
-                        budget.setAmount(Double.parseDouble(budgetAmount.getText().toString()));
+                    if (budget.compareDate()) {
+
 
                         new DatabaseHelper().addBudget(budget, new DatabaseHelper.BudgetDataStatus() {
 
@@ -147,20 +148,5 @@ public class BudgetFormActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    protected boolean compareDate(String dateFromString, String dateToString) {
-        try {
-            Date dateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(dateFromString);
-            @SuppressLint("SimpleDateFormat") Date dateTo = new SimpleDateFormat("dd/MM/yyyy").parse(dateToString);
-
-            if (dateTo != null && dateFrom != null && dateTo.compareTo(dateFrom) > 0)
-                return true;
-            else return false;
-        } catch (ParseException e) {
-            Log.i("Execption", String.valueOf(e));
-            return false;
-        }
     }
 }

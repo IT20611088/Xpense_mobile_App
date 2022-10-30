@@ -25,14 +25,12 @@ public class DatabaseHelper {
     private ArrayList<String> budgetNo = new ArrayList<>();
 
     public DatabaseHelper() {
-
         dbRef = FirebaseDatabase.getInstance().getReference().child("user_budgets");
     }
 
     //Get all budget records from database
     protected void readBudget(final BudgetDataStatus budgetDataStatus) {
-
-        //User ID
+        //Get Current User ID
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         dbRef.child(userId).addValueEventListener(new ValueEventListener() {
@@ -46,7 +44,6 @@ public class DatabaseHelper {
                     int count = 0;
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         //Assign retrieved values to a budget object
-
                         Budget budget = new Budget();
                         budget.setDate_from(ds.child("date_from").getValue().toString());
                         budget.setDate_to(ds.child("date_to").getValue().toString());
@@ -68,9 +65,7 @@ public class DatabaseHelper {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
@@ -79,22 +74,17 @@ public class DatabaseHelper {
         //User Id
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
         dbRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
-                    Log.i("No children-------------------------------------------------------", "false");
-
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                        try {
-                            Date tempDateFrom = formatter.parse(ds.child("date_from").getValue().toString());
-                            Date tempDateTo = formatter.parse(ds.child("date_to").getValue().toString());
-                            Date dateFrom = formatter.parse(budget.getDate_from());
-                            Date dateTo = formatter.parse(budget.getDate_to());
+                            String tempDateFrom = ds.child("date_from").getValue().toString();
+                            String tempDateTo = ds.child("date_to").getValue().toString();
+                            String dateFrom = budget.getDate_from();
+                            String dateTo = budget.getDate_to();
 
                             //Budget that user is trying to adding is within given range
-                            //budget is outside of already available budgets
                             if(dateValidator(tempDateFrom, tempDateTo, dateFrom, dateTo)){
                                 //Get current user id
                                 String key = dbRef.child(userId).push().getKey();
@@ -105,17 +95,13 @@ public class DatabaseHelper {
                                     }
                                 });
                                 break;
-                            }
+                            } //budget is outside of already available budgets
                             else{
                                 dataStatus.DisplayAlerts();
                             }
-
-                        } catch (ParseException e) {
-                            Log.e("__________________________________________________________________EXCEPTION", String.valueOf(e));
-                        }
                     }
-
-                } else {
+                }
+                else {
                     // if this is the first budget
                     String key = dbRef.child(userId).push().getKey();
                     dbRef.child(userId).child(key).setValue(budget).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -126,13 +112,9 @@ public class DatabaseHelper {
                     });
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-
     }
 
     //Update a budget record
@@ -174,7 +156,17 @@ public class DatabaseHelper {
     }
 
     //Date validator
-    protected boolean dateValidator(Date tempDateFrom, Date tempDateTo, Date dateFrom, Date dateTo){
-        return dateFrom.equals(tempDateTo) || dateTo.equals(tempDateFrom) || dateTo.before(tempDateFrom) || dateFrom.after(tempDateTo);
+    public boolean dateValidator(String tempFrom, String tempTo, String from, String to){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+        Date tempDateFrom = formatter.parse(tempFrom);
+        Date tempDateTo = formatter.parse(tempTo);
+        Date dateFrom = formatter.parse(from);
+        Date dateTo = formatter.parse(to);
+            return dateFrom.equals(tempDateTo) || dateTo.equals(tempDateFrom) || dateTo.before(tempDateFrom) || dateFrom.after(tempDateTo);
+        } catch (ParseException e) {
+            Log.e("__________________________________________________________________EXCEPTION", String.valueOf(e));
+            return false;
+        }
     }
 }
