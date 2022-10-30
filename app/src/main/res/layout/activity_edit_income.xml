@@ -114,7 +114,7 @@
     <Spinner
         android:id="@+id/editCurrencyValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="24dp"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="17dp"
@@ -187,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="65dp"
         android:text="@string/uploadImageText"
         app:layout_constraintBottom_toTopOf="@+id/expenseSaveButton"
 
@@ -199,7 +199,7 @@
         android:id="@+id/uploadImageBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="250dp"
         android:background="@drawable/button_tap_selector"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"

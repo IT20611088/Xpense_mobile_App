@@ -21,6 +21,21 @@
         android:theme="@style/Theme.XpenseMobileApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".budget.BudgetReportActivity"
+            android:exported="false"
+        android:parentActivityName=".Navigation_drawer"/>
+        <activity
+            android:name=".budget.UpdateBudgetFormActivity"
+            android:exported="false"
+        android:parentActivityName=".budget.BudgetReportActivity"/>
+        <activity
+            android:name=".budget.BudgetFormActivity"
+            android:exported="false"
+        android:parentActivityName=".budget.BudgetReportActivity"/>
+
+
         <activity
             android:name=".income.IncomeDashboardActivity"
             android:exported="false"

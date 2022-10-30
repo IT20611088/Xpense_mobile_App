@@ -113,7 +113,7 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dateCurrent = new Date();
 
-        Date date=formatter.parse(dateTxt);
+
 
 
         // checking whether any of the above fields are empty
@@ -125,10 +125,6 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
             Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
         }
 
-        else if(date.after(dateCurrent)){
-            Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
-        }
-
         else if(payerTxt.matches("")){
             Snackbar.make(view, "Please input a value for payer", Snackbar.LENGTH_SHORT).show();
         }
@@ -138,33 +134,44 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
         }
 
         else{
-            //create new object of IncomeForm class
-            IncomeForm income = new IncomeForm(amountTxt, currencyTxt, dateTxt, payerTxt, descriptionTxt);
 
-            new FirebaseDatabaseHelper().addIncome(income, new FirebaseDatabaseHelper.DataStatus() {
-                @Override
-                public void DataIsLoaded(List<IncomeForm> incomes, List<String> keys) {
+            Date date=formatter.parse(dateTxt);
 
-                }
+            if(date.after(dateCurrent)){
+                Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
+            }
 
-                @Override
-                public void DataIsInserted() {
-                    Toast.makeText(IncomeFormActivity.this, "Income added successfully", Toast.LENGTH_SHORT).show();
+            else{
+                //create new object of IncomeForm class
+                IncomeForm income = new IncomeForm(amountTxt, currencyTxt, dateTxt, payerTxt, descriptionTxt);
 
-                    Intent intent = new Intent(getApplicationContext(), IncomeDashboardActivity.class);
-                    startActivity(intent);
-                }
+                new FirebaseDatabaseHelper().addIncome(income, new FirebaseDatabaseHelper.DataStatus() {
+                    @Override
+                    public void DataIsLoaded(List<IncomeForm> incomes, List<String> keys) {
 
-                @Override
-                public void DataIsUpdated() {
+                    }
 
-                }
+                    @Override
+                    public void DataIsInserted() {
+                        Toast.makeText(getApplicationContext(), "Income added successfully", Toast.LENGTH_SHORT).show();
 
-                @Override
-                public void DataIsDeleted() {
+                        Intent intent = new Intent(getApplicationContext(), IncomeDashboardActivity.class);
+                        startActivity(intent);
+                    }
 
-                }
-            });
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+            }
+
+
         }
 
     }

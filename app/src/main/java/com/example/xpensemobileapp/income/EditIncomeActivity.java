@@ -228,7 +228,7 @@ public class EditIncomeActivity extends AppCompatActivity {
                     Toast.makeText(EditIncomeActivity.this, "Income updated successfully", Toast.LENGTH_SHORT).show();
 
 
-                    Intent intent = new Intent(getApplicationContext(), IncomeOverviewActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), IncomeDashboardActivity.class);
                     startActivity(intent);
 
                 }

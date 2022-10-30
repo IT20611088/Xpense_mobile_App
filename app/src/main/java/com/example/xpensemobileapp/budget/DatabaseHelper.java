@@ -25,7 +25,7 @@ public class DatabaseHelper {
     private ArrayList<String> budgetNo = new ArrayList<>();
 
     public DatabaseHelper() {
-        dbRef = FirebaseDatabase.getInstance().getReference().child("user_budgets");
+       // dbRef = FirebaseDatabase.getInstance().getReference().child("user_budgets");
     }
 
     //Get all budget records from database

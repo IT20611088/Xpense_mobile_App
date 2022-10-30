@@ -18,15 +18,15 @@ public class ExampleUnitTest {
     @Test
     public void fromToDateCheck(){
         Budget budget= new Budget();
-        budget.setDate_from("25/01/2023");
-        budget.setDate_to("31/09/2021");
+        budget.setDate_from("25/10/2022");
+        budget.setDate_to("20/10/2022");
         assertEquals(false, budget.compareDate());
     }
 
     @Test
     public void isInRange(){
         DatabaseHelper databaseHelper = new DatabaseHelper();
-        Boolean expected = databaseHelper.dateValidator("12/10/2022", "18/10/2022", "15/10/2022", "31/10/2022");
-        assertEquals(false, expected);
+        Boolean expected = databaseHelper.dateValidator("12/10/2022", "18/10/2022", "20/10/2022", "25/10/2022");
+        assertEquals(true, expected);
     }
 }

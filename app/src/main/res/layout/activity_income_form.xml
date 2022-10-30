@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
 
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:text="@string/amount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -113,7 +113,7 @@
     <Spinner
         android:id="@+id/currencyValue"
         style="@style/valueStyling"
-        android:layout_width="166dp"
+        android:layout_width="150dp"
         android:layout_height="24dp"
         android:layout_marginTop="9dp"
         android:layout_marginEnd="17dp"
@@ -207,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="60dp"
         android:text="@string/uploadImageText"
         app:layout_constraintBottom_toTopOf="@+id/addButton"
 
@@ -219,7 +219,7 @@
         android:id="@+id/uploadImageBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="260dp"
         android:background="@drawable/button_tap_selector"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
