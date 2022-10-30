@@ -7,7 +7,7 @@
     android:layout_marginLeft="34dp"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="35dp"
-    android:background="@drawable/expense_dashboard_recycler_list_background"
+    android:background="@drawable/splash_screen_background"
 
     android:padding="10dp"
     android:scrollIndicators="none">
@@ -25,7 +25,7 @@
         app:srcCompat="@drawable/img2" />
 
     <TextView
-        android:id="@+id/expenseNo"
+        android:id="@+id/incomeNo"
         style="@style/expenseNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

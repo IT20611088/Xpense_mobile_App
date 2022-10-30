@@ -18,6 +18,7 @@ import com.example.xpensemobileapp.R;
 import com.example.xpensemobileapp.User;
 import com.example.xpensemobileapp.databinding.FragmentHomeBinding;
 import com.example.xpensemobileapp.expense.ExpensesDashboardActivity;
+import com.example.xpensemobileapp.income.IncomeDashboardActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     private ImageButton expenseBtn;
+    private ImageButton incomeBtn;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +58,18 @@ public class HomeFragment extends Fragment {
 
 
 
+        //income btn in home
+        this.incomeBtn = (ImageButton)root.findViewById(R.id.imageButton) ;
+
+        this.incomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), IncomeDashboardActivity.class));
+            }
+        });
+
+
+
         // Initialize Firebase Auth
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
@@ -63,7 +77,7 @@ public class HomeFragment extends Fragment {
 //        textHome = getView().findViewById(R.id.textView17);
 //
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("testincome").child(currentUser.getUid());
+        DatabaseReference reference = database.getReference("user_incomes").child(currentUser.getUid());
         //String key = reference.push().getKey();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,15 +85,17 @@ public class HomeFragment extends Fragment {
 
                 int sum=0;
 
+                mTotal = getView().findViewById(R.id.textView9);
+
                  for(DataSnapshot ds:snapshot.getChildren()) {
                     Map<String,Object> map = (Map<String,Object>) ds.getValue();
-                    Object price = map.get("price");
+                    Object price = map.get("amount");
                     int pValue = Integer.parseInt(String.valueOf(price));
                     sum += pValue;
 
-                    //mTotal.setText(String.valueOf(sum));
+                    mTotal.setText(String.valueOf(sum)+".00");
 
-                     Log.d("sum",String.valueOf(sum));
+//                     Log.d("sum",String.valueOf(sum));
 
                 }
             }

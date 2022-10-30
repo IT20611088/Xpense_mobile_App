@@ -22,16 +22,16 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "test.my.recyclerview.RecyclerViewAdapter";
 
-    private ArrayList<String> expenseNo = new ArrayList<String>();
-    private ArrayList<String> expenseDate = new ArrayList<>();
-    private ArrayList<String> expenseID = new ArrayList<>();
+    private ArrayList<String> incomeNo = new ArrayList<String>();
+    private ArrayList<String> incomeDate = new ArrayList<>();
+    private ArrayList<String> incomeID = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> expenseNo, ArrayList<String> expenseDate,
-                               ArrayList<String> expenseID, Context mContext) {
-        this.expenseNo = expenseNo;
-        this.expenseDate = expenseDate;
-        this.expenseID = expenseID;
+    public RecyclerViewAdapter(ArrayList<String> incomeNo, ArrayList<String> incomeDate,
+                               ArrayList<String> incomeID, Context mContext) {
+        this.incomeNo = incomeNo;
+        this.incomeDate = incomeDate;
+        this.incomeID = incomeID;
         this.mContext = mContext;
     }
 
@@ -49,25 +49,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d(TAG, "onBindViewHolder: called");
         //Glide.with(mContext).asBitmap().load(mImage.get(position)).into(holder.image);
 
-        holder.db_id.setText(expenseID.get(position));
-        holder.expenseNo.setText(expenseNo.get(position));
-        holder.date.setText(expenseDate.get(position));
+        holder.db_id.setText(incomeID.get(position));
+        holder.incomeNo.setText(incomeNo.get(position));
+        holder.date.setText(incomeDate.get(position));
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on"+expenseNo.get(position));
-                Toast.makeText(mContext,expenseNo.get(position),Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: clicked on"+incomeNo.get(position));
+                Toast.makeText(mContext,incomeNo.get(position),Toast.LENGTH_SHORT).show();
             }
         });
     }
     @Override
     public int getItemCount() {
-        return expenseNo.size();
+        return incomeNo.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
         // ImageView imageView;
         TextView db_id;
-        TextView expenseNo;
+        TextView incomeNo;
         ImageButton imgBtn;
         TextView date;
         RelativeLayout parentLayout;
@@ -75,7 +75,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             //imageView = itemView.findViewById(R.id.imageView);
             db_id = itemView.findViewById(R.id.db_id);
-            expenseNo = itemView.findViewById(R.id.expenseNo);
+            incomeNo = itemView.findViewById(R.id.incomeNo);
             date = itemView.findViewById(R.id.date);
 
             imgBtn = itemView.findViewById(R.id.imageButtonArrow);
@@ -87,6 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, IncomeOverviewActivity.class);
                     intent.putExtra("id", db_id.getText().toString());
+                    intent.putExtra("incomeNo", incomeNo.getText().toString());
 //                    intent.putExtra("amount", )
 
 

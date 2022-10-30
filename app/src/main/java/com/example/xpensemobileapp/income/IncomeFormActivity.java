@@ -1,4 +1,4 @@
-package com.example.xpensemobileapp.expense;
+package com.example.xpensemobileapp.income;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,59 +17,43 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xpensemobileapp.R;
+import com.example.xpensemobileapp.income.FirebaseDatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity {
     private final Calendar myCalendar= Calendar.getInstance();
 
-    //declare the spinner object for payment method
-    private Spinner paymentMethod;
 
     //declare the spinner object for currency type
     private Spinner currencyType;
 
-    //declare the spinner object for category type
-    private Spinner categoryType;
 
     //declare objects for the rest of the inputs
     private EditText amount;
     private EditText date;
-    private EditText payee;
+    private EditText payer;
     private EditText description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_expense_form);
+        setContentView(R.layout.activity_income_form);
+        setTitle("Add Income");
 
         this.amount = findViewById(R.id.amountValue);
-        this.payee = findViewById(R.id.payeeValue);
+        this.payer = findViewById(R.id.payerValue);
         this.description = findViewById(R.id.descriptionValue);
 
-        //if()
-        //Log.i("intentVal", getIntent().getExtras().getString("id"));
 
-        //TextView amountLbl = findViewById(R.id.amountLabel);
-
-        this.paymentMethod = findViewById(R.id.methodValue);
-        //create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(this,
-                R.array.paymentTypes, R.layout.spinner_item);
-
-        //specify the layout to use when the list of choices appears
-        paymentAdapter.setDropDownViewResource(R.layout.spinner_dropdown_list);
-
-        //apply the adapter to the spinner
-        this.paymentMethod.setAdapter(paymentAdapter);
-
-
-        /*********************************************************************************************/
 
         this.currencyType = findViewById(R.id.currencyValue);
         //create an ArrayAdapter using the string array and a default spinner layout
@@ -82,21 +66,7 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
         //apply the adapter to the spinner
         this.currencyType.setAdapter(currencyAdapter);
 
-        /*********************************************************************************************/
 
-        this.categoryType = findViewById(R.id.categoryValue);
-        //create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.categoryTypes, R.layout.spinner_item);
-
-        //specify the layout to use when the list of choices appears
-        categoryAdapter.setDropDownViewResource(R.layout.spinner_dropdown_list);
-
-        //apply the adapter to the spinner
-        this.categoryType.setAdapter(categoryAdapter);
-
-
-        /*********************************************************************************************/
 
 
         //for the date value
@@ -130,15 +100,21 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
         this.date.setText(dateFormat.format(myCalendar.getTime()));
     }
 
-    public void addExpense(View view) {
+    public void addIncome(View view) throws ParseException {
         //get the values of the input fields
         String amountTxt = this.amount.getText().toString();
         String currencyTxt = this.currencyType.getSelectedItem().toString();
-        String methodTxt = this.paymentMethod.getSelectedItem().toString();
+        //String methodTxt = this.paymentMethod.getSelectedItem().toString();
         String dateTxt = this.date.getText().toString();
-        String payeeTxt = this.payee.getText().toString();
-        String categoryTxt = this.categoryType.getSelectedItem().toString();
+        String payerTxt = this.payer.getText().toString();
+        //String categoryTxt = this.categoryType.getSelectedItem().toString();
         String descriptionTxt = description.getText().toString();
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateCurrent = new Date();
+
+        Date date=formatter.parse(dateTxt);
+
 
         // checking whether any of the above fields are empty
         if(amountTxt.matches("")){
@@ -149,8 +125,12 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
             Snackbar.make(view, "Please input a value for date", Snackbar.LENGTH_SHORT).show();
         }
 
-        else if(payeeTxt.matches("")){
-            Snackbar.make(view, "Please input a value for payee", Snackbar.LENGTH_SHORT).show();
+        else if(date.after(dateCurrent)){
+            Snackbar.make(view, "Date cannot be a future date", Snackbar.LENGTH_SHORT).show();
+        }
+
+        else if(payerTxt.matches("")){
+            Snackbar.make(view, "Please input a value for payer", Snackbar.LENGTH_SHORT).show();
         }
 
         else if(descriptionTxt.matches("")){
@@ -158,19 +138,21 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
         }
 
         else{
-            //create new object of ExpenseForm class
-            ExpenseForm expense = new ExpenseForm(amountTxt, currencyTxt, methodTxt, dateTxt, payeeTxt,
-                    categoryTxt, descriptionTxt);
+            //create new object of IncomeForm class
+            IncomeForm income = new IncomeForm(amountTxt, currencyTxt, dateTxt, payerTxt, descriptionTxt);
 
-            new FirebaseDatabaseHelper().addExpense(expense, new FirebaseDatabaseHelper.DataStatus() {
+            new FirebaseDatabaseHelper().addIncome(income, new FirebaseDatabaseHelper.DataStatus() {
                 @Override
-                public void DataIsLoaded(List<ExpenseForm> expenses, List<String> keys) {
+                public void DataIsLoaded(List<IncomeForm> incomes, List<String> keys) {
 
                 }
 
                 @Override
                 public void DataIsInserted() {
-                    Toast.makeText(getApplicationContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IncomeFormActivity.this, "Income added successfully", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getApplicationContext(), IncomeDashboardActivity.class);
+                    startActivity(intent);
                 }
 
                 @Override
@@ -189,7 +171,7 @@ public class IncomeFormActivity<FragmentContainerView> extends AppCompatActivity
 
 
     public void next(View view){
-        Intent intent = new Intent(IncomeFormActivity.this, ExpenseReportActivity.class);
+        Intent intent = new Intent(IncomeFormActivity.this, IncomeReportActivity.class);
         startActivity(intent);
     }
 

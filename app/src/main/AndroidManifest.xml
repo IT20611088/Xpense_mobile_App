@@ -21,17 +21,9 @@
         android:theme="@style/Theme.XpenseMobileApp"
         tools:targetApi="31">
         <activity
-            android:name=".budget.BudgetReportActivity"
+            android:name=".income.IncomeDashboardActivity"
             android:exported="false"
             android:parentActivityName=".Navigation_drawer"/>
-        <activity
-            android:name=".budget.UpdateBudgetFormActivity"
-            android:exported="false"
-            android:parentActivityName=".budget.BudgetReportActivity"/>
-        <activity
-            android:name=".budget.BudgetFormActivity"
-            android:exported="false"
-            android:parentActivityName=".budget.BudgetReportActivity"/>
         <activity
             android:name=".income.IncomeReportOverviewActivity"
             android:exported="false" />
@@ -39,7 +31,11 @@
             android:name=".income.IncomeReportActivity"
             android:exported="false" />
         <activity
-            android:name=".expense.IncomeFormActivity"
+            android:name=".income.IncomeOverviewActivity"
+            android:exported="false"
+            android:parentActivityName=".income.IncomeDashboardActivity"/>
+        <activity
+            android:name=".income.IncomeFormActivity"
             android:exported="false" />
         <activity
             android:name=".income.EditIncomeActivity"
@@ -48,7 +44,13 @@
             android:name=".income.IncomeOverviewActivity"
             android:exported="false" />
         <activity
+            android:name=".expense.EditExpenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".income.IncomeDashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".expense.ExpensesDashboardActivity"
             android:exported="false" />
         <activity
             android:name=".Navigation_drawer"
@@ -58,6 +60,10 @@
         <activity
             android:name=".TtestingHome"
             android:exported="false" />
+        <activity
+            android:name=".expense.ExpenseOverviewActivity"
+            android:exported="false"
+            android:parentActivityName=".expense.ExpensesDashboardActivity" />
         <activity
             android:name=".SignUp_page"
             android:exported="false" />

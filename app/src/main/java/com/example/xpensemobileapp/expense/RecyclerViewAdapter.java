@@ -76,7 +76,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             //imageView = itemView.findViewById(R.id.imageView);
             db_id = itemView.findViewById(R.id.db_id);
-            expenseNo = itemView.findViewById(R.id.expenseNo);
+            expenseNo = itemView.findViewById(R.id.incomeNo);
             date = itemView.findViewById(R.id.date);
 
             imgBtn = itemView.findViewById(R.id.imageButtonArrow);

@@ -6,4 +6,225 @@
     android:layout_height="match_parent"
     tools:context=".income.IncomeFormActivity">
 
+    <TextView
+        android:id="@+id/amountLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+
+        android:layout_marginTop="80dp"
+        android:text="@string/amount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/payerLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/payer"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel" />
+
+    <TextView
+        android:id="@+id/dateLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/date"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currencyLabel" />
+
+    <TextView
+        android:id="@+id/currencyLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/currency"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/amountLabel" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        style="@style/labelStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/description"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payerLabel" />
+
+    <EditText
+        android:id="@+id/amountValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="@string/amountHint"
+        android:inputType="numberDecimal"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/amountLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/payerValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="@string/payerHint"
+        android:inputType="textPersonName"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/payerLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/dateValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+
+        android:focusableInTouchMode="false"
+
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dateLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Spinner
+        android:id="@+id/currencyValue"
+        style="@style/valueStyling"
+        android:layout_width="166dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="17dp"
+
+        android:backgroundTint="@color/black"
+
+        android:popupBackground="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountValue" />
+
+    <EditText
+        android:id="@+id/descriptionValue"
+        style="@style/valueStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/descriptionHint"
+        android:inputType="textMultiLine"
+
+        app:layout_constraintBaseline_toBaselineOf="@+id/descriptionLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/addButton"
+        style="@style/addBtnStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+
+        android:backgroundTint="@color/add_generate_color"
+        android:onClick="addIncome"
+
+        android:text="@string/addBtnName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/plusButton"
+        style="@style/plusBtnStyling"
+        android:visibility="gone"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="34dp"
+        android:onClick="next"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+
+        android:paddingRight="0dp"
+
+        android:paddingBottom="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/green_plus_icon"
+
+        android:background="@drawable/button_tap_selector"/>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionValue">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/uploadedImageFragmentContainer"
+            android:name="com.example.xpensemobileapp.income.UploadedImageFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="2dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/uploadImageText"
+        style="@style/uploadImageTextStyling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="52dp"
+        android:text="@string/uploadImageText"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.616"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/uploadImageBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/button_tap_selector"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/upload_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

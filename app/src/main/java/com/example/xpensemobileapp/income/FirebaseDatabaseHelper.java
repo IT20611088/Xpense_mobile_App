@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,40 +19,46 @@ import java.util.List;
 public class FirebaseDatabaseHelper {
 
     private FirebaseDatabase mDatabase;
-    private DatabaseReference mReferenceExpense;
-    private List<IncomeForm> expenses = new ArrayList<>();
+    private DatabaseReference mReferenceIncome;
+    private List<IncomeForm> incomes = new ArrayList<>();
+    private String userId;
 
     public interface DataStatus{
-        void DataIsLoaded(List<IncomeForm> Incomes, List<String> keys);
+        void DataIsLoaded(List<IncomeForm> incomes, List<String> keys);
         void DataIsInserted();
         void DataIsUpdated();
         void DataIsDeleted();
     }
 
     public FirebaseDatabaseHelper(){
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         this.mDatabase = FirebaseDatabase.getInstance();
-        this.mReferenceExpense = this.mDatabase.getReference("expenses");
+        this.mReferenceIncome = this.mDatabase.getReference("user_incomes").child(userId);
     }
 
 
-    public void readExpenses(final DataStatus dataStatus){
-        this.mReferenceExpense.addValueEventListener(new ValueEventListener() {
+    public void readIncomes(final DataStatus dataStatus){
+
+        this.mReferenceIncome.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                expenses.clear();
+                incomes.clear();
+
+                Log.i("=====================", String.valueOf(incomes.isEmpty()));
+
                 List<String> keys = new ArrayList<>();
 
                 for(DataSnapshot keyNode : snapshot.getChildren()){
                     keys.add(keyNode.getKey());
 
-                    //create new expense
+                    //create new income
                     IncomeForm income = keyNode.getValue(IncomeForm.class);
 
-                    //add new data to expenses array list
-                    expenses.add(income);
+                    //add new data to incomes array list
+                    incomes.add(income);
                 }
 
-                dataStatus.DataIsLoaded(expenses, keys);
+                dataStatus.DataIsLoaded(incomes, keys);
             }
 
             @Override
@@ -62,9 +69,9 @@ public class FirebaseDatabaseHelper {
     }
 
 
-    public void addExpense(IncomeForm expense, final DataStatus dataStatus){
-        String key = mReferenceExpense.push().getKey();
-        mReferenceExpense.child(key).setValue(expense).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void addIncome(IncomeForm income, final DataStatus dataStatus){
+        String key = mReferenceIncome.push().getKey();
+        mReferenceIncome.child(key).setValue(income).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 dataStatus.DataIsInserted();
@@ -73,8 +80,8 @@ public class FirebaseDatabaseHelper {
     }
 
 
-    public void updateExpense(String key, IncomeForm expense, final DataStatus dataStatus){
-        mReferenceExpense.child(key).setValue(expense).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void updateIncome(String key, IncomeForm income, final DataStatus dataStatus){
+        mReferenceIncome.child(key).setValue(income).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 dataStatus.DataIsUpdated();
@@ -82,8 +89,8 @@ public class FirebaseDatabaseHelper {
         });
     }
 
-    public void deleteExpense(String key, final DataStatus dataStatus){
-        mReferenceExpense.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void deleteIncome(String key, final DataStatus dataStatus){
+        mReferenceIncome.child(key).setValue(null).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 dataStatus.DataIsDeleted();
